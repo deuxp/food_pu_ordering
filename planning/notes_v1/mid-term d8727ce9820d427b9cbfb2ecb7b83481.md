@@ -120,6 +120,14 @@ as a customer, I want to
 ---
 
 1. Generic landing page — VIEW
+
+- nav bar
+- menu items
+  - loggin in
+  - view account
+  - order history
+  - log out
+
 2. customer choice dashboard — VIEW
 3. restaurant template — VIEW
     1. dynamic item add 
@@ -180,11 +188,15 @@ as a customer, I want to
     5. tax
     6. tip
     7. total
-6. ratings (many2one)
+    8. timestamp
+6. menu_items_orders
+    1. ID
+    2. menu_item_id
+    3. order_id
+7. ratings (many2one)
     1. ID
     2. user_id ?
     3. restaurant_id
-    
 
 NOTE: need to keep track of the feature add instruction to the order.. should be done in JS and just disappear.. OR should there be a table linking that way the order can be disputed
 
