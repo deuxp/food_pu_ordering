@@ -5,5 +5,5 @@ CREATE TABLE order_items (
   order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
   item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
   modification VARCHAR(255),
-  qty INTEGER
+  qty INTEGER DEFAULT 1 -- not seeded in this db
 );
