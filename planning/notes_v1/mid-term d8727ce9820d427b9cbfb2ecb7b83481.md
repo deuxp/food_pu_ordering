@@ -231,3 +231,10 @@ NOTE: need to keep track of the feature add instruction to the order.. should be
                 - pull once a day
 
 # Should we Deploy ?
+
+
+# CHEFS page
+
+- [] how many minutes
+- [] which phone sending to
+- [] display order
