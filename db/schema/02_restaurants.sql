@@ -5,9 +5,11 @@ CREATE TABLE restaurants (
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
   address VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  province VARCHAR(255) NOT NULL,
   phone VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  open INTEGER NOT NULL,
-  close INTEGER NOT NULL,
+  open TIME NOT NULL,
+  close TIME NOT NULL,
   password VARCHAR(255) NOT NULL
 );
