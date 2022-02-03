@@ -1,6 +1,50 @@
 // See: https://sass-lang.com/
 
+/*
+colour palette
+red: #E74645
+orange: #FB7756
+dark yellow: #FACD60
+bright yellow: #FDFA66
+blue: #1AC0C6
+*/
+
 body,
 html {
   margin: 0;
+  height:100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em;
+  width: 100%;
+  margin: auto;
+  height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+
+#textbox {
+  height: 300px;
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+
+#see-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+}
+
+#food-search {
+  width: 100%;
 }
