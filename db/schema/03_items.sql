@@ -6,7 +6,7 @@ CREATE TABLE items (
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255),
   category VARCHAR(255),
-  available BOOLEAN DEFALULT true,
+  available BOOLEAN DEFAULT true,
   thumbnail VARCHAR(255) NOT NULL,
   price INTEGER NOT NULL
 );
