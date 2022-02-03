@@ -6,6 +6,6 @@ CREATE TABLE orders (
   customer_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   instructions VARCHAR(255),
   status VARCHAR(255) DEFAULT 'pending',
-  time  DEFAULT transaction_timestamp(),
+  time TIMESTAMP,
   tip INTEGER DEFAULT 0
 );

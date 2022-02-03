@@ -7,6 +7,6 @@
 -- INIT THE ORDER
 --- --- -- -- - - --- -- - - - - -- - - - --- -- -  -
 
-INSERT INTO orders (restaurant_id, customer_id, name, instructions, status, time)
-VALUES (1, 1, 'lunch', 'not too hot', 'pending', now())
+INSERT INTO orders (restaurant_id, customer_id, instructions, time)
+VALUES (1, 1, 'not too hot', now())
 RETURNING *;
