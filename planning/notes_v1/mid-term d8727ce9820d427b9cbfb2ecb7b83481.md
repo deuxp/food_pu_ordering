@@ -233,8 +233,101 @@ NOTE: need to keep track of the feature add instruction to the order.. should be
 # Should we Deploy ?
 
 
-# CHEFS page
+## CHEFS page
 
 - [] how many minutes
 - [] which phone sending to
 - [] display order
+
+## schema
+
+```sql
+
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS restaurants CASCADE;
+DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS order_items CASCADE;
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  postal VARCHAR(255) NOT NULL,
+  credit VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE restaurants (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  phone VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  open INTEGER NOT NULL,
+  close INTEGER NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE items (
+  id SERIAL PRIMARY KEY NOT NULL,
+  restaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  category VARCHAR(255) NOT NULL,
+  available BOOLEAN NOT NULL,
+  thumbnail VARCHAR(255) NOT NULL,
+  price INTEGER NOT NULL
+);
+
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY NOT NULL,
+  restaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
+  customer_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  instructions VARCHAR(255) NOT NULL,
+  status VARCHAR(255) NOT NULL,
+  time TIMESTAMP,
+  tip INTEGER
+);
+
+CREATE TABLE order_items (
+  id SERIAL PRIMARY KEY NOT NULL,
+  order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+  item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
+  modification VARCHAR(255)
+);
+
+```
+
+## twilio example
+
+```javascript
+// Download the helper library from https://www.twilio.com/docs/node/install
+// Find your Account SID and Auth Token at twilio.com/console
+// and set the environment variables. See http://twil.io/secure
+
+require('dotenv').config()
+
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const myPhone = process.env.PHONE_RECIEVE;
+const twilio = process.env.PHONE_TWILIO;
+const client = require('twilio')(accountSid, authToken);
+
+client.messages
+  .create({
+     body: 'BELIEVE IT OR NOT, GEORGE ISNt at home',
+     from: twilio,
+     to: myPhone
+   })
+  .then(message => console.log(message.sid))
+  .catch(e => console.error('uh oh', e.stack));
+
+```
