@@ -8,13 +8,38 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;1,300&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+
+  <nav>
+    <span id="logo">YUMRs</span>
+    <div class="left-bar">
+      <span id="new-tweet">
+        <button id="menu-button">menu</button>
+      </span>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div id="textbox">
+      <input id="food-search" type="text" placeholder="What's your food mood?">
+    </div>
+    <div id="see-more">
+      <p>featured restaurant</p>
+      <button>see more</button>
+    </div>
+  </main>
+
 </body>
 
 </html>
