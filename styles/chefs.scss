@@ -1,0 +1,45 @@
+.chef-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 1.5em;
+  width: 100%;
+  margin: auto;
+  height: 100%;
+  font-family: "Lato", sans-serif;
+  justify-content: space-around;
+}
+
+.order-view {
+  display: flex;
+  background-color: rgb(135, 136, 163);
+  width: 40%;
+  padding: 1em;
+  margin: 1em;
+
+}
+
+.status-entry {
+  display: flex;
+  background-color: rgb(163, 155, 135);
+  width: 40%;
+  height: 100%;
+  padding: 1em;
+  margin: 1em;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+  border-radius: 7px;
+}
+
+// .pending {
+//   background-color: rgb(207, 206, 207);
+// }
+
+.pickup-time {
+  background-color: green;
+}
+
+.ready {
+  background-color: orange;
+}
