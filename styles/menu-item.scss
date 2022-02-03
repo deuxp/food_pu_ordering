@@ -2,14 +2,20 @@
 main.menu-item {
   display:flex;
   flex-direction: column;
+  justify-content: center;
+  margin: auto;
 }
 
 section.menu-item {
   display: flex;
+  flex: center;
 }
 
 .menu-item-details {
   display: flex;
+}
+.menu-item-details-left {
+  min-width: 600px;
 }
 
 .menu-item-details-left-bottom {
