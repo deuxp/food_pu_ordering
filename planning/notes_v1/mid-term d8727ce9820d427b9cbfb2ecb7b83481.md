@@ -305,8 +305,29 @@ CREATE TABLE order_items (
 
 ```
 
-## SQL requirements
+## twilio example
 
----
+```javascript
+// Download the helper library from https://www.twilio.com/docs/node/install
+// Find your Account SID and Auth Token at twilio.com/console
+// and set the environment variables. See http://twil.io/secure
 
-customer menu page
+require('dotenv').config()
+
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const myPhone = process.env.PHONE_RECIEVE;
+const twilio = process.env.PHONE_TWILIO;
+const client = require('twilio')(accountSid, authToken);
+
+client.messages
+  .create({
+     body: 'BELIEVE IT OR NOT, GEORGE ISNt at home',
+     from: twilio,
+     to: myPhone
+   })
+  .then(message => console.log(message.sid))
+  .catch(e => console.error('uh oh', e.stack));
+
+```
