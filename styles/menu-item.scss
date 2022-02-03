@@ -1,0 +1,18 @@
+
+main.menu-item {
+  display:flex;
+  flex-direction: column;
+}
+
+section.menu-item {
+  display: flex;
+}
+
+.menu-item-details {
+  display: flex;
+}
+
+.menu-item-details-left-bottom {
+  display:  flex;
+  justify-content: space-between;
+}
