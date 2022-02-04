@@ -13,6 +13,7 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/chefApp.js"></script>
 
   <!-- fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,18 +33,27 @@
   </nav>
 
   <main class="chef-container">
-    <div class="order-view">
-      <p>hello i am red</p>
-    </div>
+
+    <article class="chit">
+
+      <!-- template make a helper function-->
+      <!-- <div class="order-view">
+        <div class="food-name">burger-patty melt</div>
+        <div class="food-instructions"> </div>
+        <div class="food-qty">qty: 2</div>
+      </div> -->
+
+    </article>
+
 
     <div class="status-entry">
 
       <!-- PENDING: route to /pending of chefsPage.js will take care of twilio -->
       <div class="pending">
-        <form action="/chefs/pending" method='POST'>
+        <form>
           <label for="order">order #</label>
-          <input type="text" name="order">
-          <button type="submit">Submit</button>
+          <input type="text" name="order" id="order-number">
+          <button type="submit" class="pending-button">Submit</button>
         </form>
       </div>
 
