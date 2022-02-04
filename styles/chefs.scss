@@ -10,14 +10,52 @@
   justify-content: space-around;
 }
 
-.order-view {
+.chit {
   display: flex;
-  background-color: rgb(135, 136, 163);
-  width: 40%;
+
+  background-color: rgb(248, 211, 124);
+  border-radius: 5px;
+  width: 50%;
   padding: 1em;
   margin: 1em;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+//  this is the template
+// --- - - - - ---- - - - -- - - - -- - - - -
+.order-view {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(248, 211, 124);
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.5em;
+
+  .food-name {
+    background-color: rgb(211, 167, 133);
+    padding: 0.5em;
+    border-radius: 5px;
+  }
+  .food-instructions {
+    background-color: rgb(189, 123, 73);
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 5px;
+  }
+  .food-qty {
+    background-color: rgb(226, 214, 187);
+    padding: 0.5em;
+    border-radius: 5px;
+
+  }
 
 }
+
+
+
+
 
 .status-entry {
   display: flex;
