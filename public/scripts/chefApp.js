@@ -2,18 +2,6 @@
 $('document').ready(() => {
 
 
-  $('.ready-button').on('click', e => {
-    e.preventDefault();
-    $.ajax('/api/chefs/ping', { method: 'POST' })
-      .then(data => {
-        console.log(data)
-      })
-      .catch(err => {
-        res
-        .status(500)
-        .json({error: err.message})})
-  })
-
     //////////////////////
     // helper functions //
     //////////////////////
@@ -74,20 +62,59 @@ $('document').ready(() => {
   //////////////////////////////
   // listener: time-remaining //
   //////////////////////////////
+  const $minutes = $('#minutes')
 
-  $('.time-remaining-button').on('click', function(e) {
+
+  $('#time-remaining-enter').on('click', function(e) {
     e.preventDefault()
-    const $value = $('.time-remaining').val()
-    console.log($value)
+    const $num = $minutes.val()
     $.ajax({
       method: 'POST',
       url: '/api/chefs/time',
       name: 'time',
-      data: {'time': $value}
+      data: {'time': $num}
     })
     .catch(err => console.error(err.stack))
   });
 
+
+    ////////////////////////////
+    // Listener:#five-button //
+    ////////////////////////////
+
+  $('#five-button').on('click', () => {
+    let $num = $minutes.val()
+    $num = Number($num) + Number(5)
+    $minutes.val($num)
+  });
+
+
+    ////////////////////////////
+    // Listener:#ten-button //
+    ////////////////////////////
+
+  $('#ten-button').on('click', () => {
+    let $num = $minutes.val()
+    $num = Number($num) + Number(10)
+    $minutes.val($num)
+  });
+
+
+  ////////////////////////////
+  // Listener: order READY! //
+  ////////////////////////////
+
+  $('.ready-button').on('click', e => {
+    e.preventDefault();
+    $.ajax('/api/chefs/ping', { method: 'POST' })
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => {
+        res
+        .status(500)
+        .json({error: err.message})})
+  })
 
 });
 
