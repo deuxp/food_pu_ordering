@@ -34,7 +34,7 @@
 
   <main class="chef-container">
 
-    <article class="chit">
+    <article class="chit hidden">
 
       <!-- template make a helper function-->
       <!-- <div class="order-view">
@@ -53,16 +53,16 @@
         <form>
           <label for="order">order #</label>
           <input type="text" name="order" id="order-number">
-          <button type="submit" class="pending-button">Submit</button>
+          <button type="submit" class="pending-button">enter</button>
         </form>
       </div>
 
       <!-- pick up time _> sends SMS-->
       <div class="pickup">
-        <form action="/chefsPage/pickup" method='POST'>
+        <form>
           <label for="pickup">how long ?</label>
-          <input type="text" name="pickup">
-          <button type="submit">Submit</button>
+          <input type="text" name="pickup" class="time-remaining">
+          <button type="submit" class="time-remaining-button">enter</button>
         </form>
 
       </div>
