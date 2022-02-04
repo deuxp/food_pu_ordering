@@ -1,6 +1,15 @@
 
 const express = require('express');
 const router  = express.Router();
+require('dotenv').config()
+
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const myPhone = process.env.PHONE_RECIEVE;
+const twilio = process.env.PHONE_TWILIO;
+const client = require('twilio')(accountSid, authToken);
+
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -9,7 +18,6 @@ module.exports = (db) => {
     db.query(query)
       .then(data => {
         const items = data.rows;
-        // console.log(items)
         res.render("chefs");
       })
       .catch(err => {
@@ -41,7 +49,7 @@ module.exports = (db) => {
   });
 
 
-  router.post('/time', (res, req) => {
+  router.post('/time', (req, res) => {
     console.log('is this being reached .. why??')
     console.log(req)
   })
@@ -49,13 +57,25 @@ module.exports = (db) => {
 
 
   // ready button endpoint
-  router.get('/ping', (req, res) => {
-    // this is test data, but wht it should do is set the status to paid, or closed
-    db.query('select * from items;')
-    .then(items => {
+  // SMS send ready message
+  router.post('/ping', (req, res) => {
 
-      return res.send(items.rows)
+    // query the order for the chefs
+    
+
+    // sends SMS
+    client.messages
+    .create({
+      body: 'ding dong, hello it\'s me again',
+      from: twilio,
+      to: myPhone
     })
+    .then(message => console.log(message.sid))
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
   })
 
   return router;
