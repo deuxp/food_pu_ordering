@@ -9,11 +9,14 @@ $('document').ready(() => {
     // prevent default
     e.preventDefault();
     // console.log('are we there yet?')
-    $.ajax('/api/chefs/ping', { method: 'GET' })
+    $.ajax('/api/chefs/ping', { method: 'POST' })
       .then(data => {
         console.log(data)
       })
-      .catch(err => res.send(err.message))
+      .catch(err => {
+        res
+        .status(500)
+        .json({error: err.message})})
   })
 
 
@@ -74,6 +77,9 @@ $('document').ready(() => {
     .catch(err => console.error(err.stack))
 
   })
+
+
+
 
 
 });
