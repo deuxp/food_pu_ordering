@@ -41,6 +41,14 @@ module.exports = (db) => {
   });
 
 
+  router.post('/time', (res, req) => {
+
+    const time = req.body.time
+    console.log(time)
+  })
+
+
+
   // ready button endpoint
   router.get('/ping', (req, res) => {
     // this is test data, but wht it should do is set the status to paid, or closed
