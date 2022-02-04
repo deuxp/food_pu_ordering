@@ -13,8 +13,27 @@ nav {
   font-weight: bold;
   font-style: italic;
   font-size: 20px;
+  padding-right: 1.5em;
 }
 
 #menu-button {
-  height: 50px;
+  height: 40px;
+  width: 80px;
+}
+
+.links {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-bar {
+  display: flex;
+  align-items: center;
+}
+
+.left-links {
+  width: 275px;
+  display: flex;
+  justify-content: space-between;
 }
