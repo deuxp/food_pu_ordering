@@ -1,14 +1,9 @@
 
-
-    // ready button -> should
-  // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 $('document').ready(() => {
 
 
   $('.ready-button').on('click', e => {
-    // prevent default
     e.preventDefault();
-    // console.log('are we there yet?')
     $.ajax('/api/chefs/ping', { method: 'POST' })
       .then(data => {
         console.log(data)
@@ -19,67 +14,79 @@ $('document').ready(() => {
         .json({error: err.message})})
   })
 
+    //////////////////////
+    // helper functions //
+    //////////////////////
 
-
-  /**
-   *  To be used inside of the billTicket -- builds the element to be appended
-   * @param {{}} items a single queried item object that the customer ordered
+  /** -=-=---=-----=-- -- - =  -= -=-=---=-----=-- -- - =  -=
+   * Purpose: builds a DOM element -> order item
+   * Behaviour: to be used inside of the billTicket()
+   * Author: Gottfried Kleinberger
+   * @param {{}} item a single queried item object that the customer ordered
+   * @param {''} element class or id to append to
    */
-  const billItem = function(item) {
+  const billItem = function(item, element) {
     // need to sanitize STILL!! ++++++++++++++++++++++++++
     const elem = `<div class="order-view">
     <div class="food-name">${item.name}</div>
     <div class="food-instructions">${item.modification}</div>
     <div class="food-qty">qty: ${item.qty}</div>
-    </div>`
-    // ghost burger
-  $( ".chit" ).append(elem)
+    </div>`;
+    $(element).append(elem)
   };
 
-  /**
-   * The purposes of this function is to append a list of objects to a DOM element
+  /** -=-=---=-----=-- -- - =  -= -=-=---=-----=-- -- - =  -=
+   * Purpose: to append a list of objects to a DOM element
+   * Author: Gottfried Kleinberger
    * @param {[{}]} items
+   * @param {''} element class or id name you want to append the DOM Elements
    */
-  const billTicket = items => {
+  const billTicket = (items, element) => {
     items.forEach(item => {
-      billItem(item)
+      billItem(item, element)
     });
-  }
+  };
 
+  /////////////////////////////
+  // Listener: Pending Order //
+  /////////////////////////////
 
-  // order pending
   $('.pending-button').on('click', e => {
     e.preventDefault()
-
     $('article').removeClass('hidden')
-    // extract form data
+
     // need to sanitize STILL!! ++++++++++++++++++++++++++
     const order = $('#order-number').val()
-    $.ajax({method: 'POST', data: {'id': order}, url: '/api/chefs/pending', name: 'pending'})
+    $.ajax({
+      method: 'POST',
+      data: {'id': order},
+      url: '/api/chefs/pending',
+      name: 'pending'
+    })
     .then(items => {
-      // clear bil first
+      // idempotent insurance: clear bill of duplicates first
       $('article').children().remove()
-      // helper function
-      billTicket(items);
+      billTicket(items, '.chit');
     })
     .catch(err => {console.error('wha happun')})
   })
 
+  //////////////////////////////
+  // listener: time-remaining //
+  //////////////////////////////
 
-  // listener for time remaining button
-  // with .prev() sibling traversal on this to find the value instad of re-targeting with an id.. but if it doesn't work too well then use an id target
   $('.time-remaining-button').on('click', function(e) {
     e.preventDefault()
     const $value = $('.time-remaining').val()
     console.log($value)
-    // ajax post to /time
-    $.ajax({method: 'POST', url: '/api/chefs/time', name: 'time', data: {'time': 55}})
+    $.ajax({
+      method: 'POST',
+      url: '/api/chefs/time',
+      name: 'time',
+      data: {'time': $value}
+    })
     .catch(err => console.error(err.stack))
-
-  })
-
-
-
+  });
 
 
 });
