@@ -68,7 +68,10 @@ $('document').ready(() => {
   $('.time-remaining-button').on('click', function(e) {
     e.preventDefault()
     const $value = $('.time-remaining').val()
-
+    console.log($value)
+    // ajax post to /time
+    $.ajax({method: 'POST', url: '/api/chefs/time', name: 'time', data: {'time': 55}})
+    .catch(err => console.error(err.stack))
 
   })
 

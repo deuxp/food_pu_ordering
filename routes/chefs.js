@@ -42,9 +42,8 @@ module.exports = (db) => {
 
 
   router.post('/time', (res, req) => {
-
-    const time = req.body.time
-    console.log(time)
+    console.log('is this being reached .. why??')
+    console.log(req)
   })
 
 
