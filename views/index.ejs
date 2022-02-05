@@ -20,29 +20,7 @@
 </head>
 
 <body>
-
-  <nav>
-    <span id="logo">YUMRs</span>
-    <div class="links">
-      <div class="left-bar">
-        <span class="left-links">
-          <a class="nav-item nav-link" href="/api/items" style="text-decoration: none;">Menu</a>
-          <a class="nav-item nav-link" href="/account" style="text-decoration: none;">Account</a>
-          <a class="nav-item nav-link" href="/chefs-portal" style="text-decoration: none;">Chef's Portal</a>
-          <a class="nav-item nav-link" href="/about" style="text-decoration: none;">About</a>
-        </span>
-      </div>
-      <div class="right-bar">
-        <form class="form-inline" action="/:id" method="GET">
-          <span>
-            <input class="form-control" type="user_id" name="user_id" placeholder="username" style="width: 100px; height: 30px;">
-            <button id="login-button">Login</button>
-          </span>
-        </form>
-      </div>
-    </div>
-  </nav>
-
+  <%- include('partials/_nav') %>
   <main class="container">
     <p>featured restaurant</p>
   </main>
