@@ -42,9 +42,9 @@ $('document').ready(() => {
   $('.pending-button').on('click', e => {
     e.preventDefault()
     $('article').removeClass('hidden')
-
     // need to sanitize STILL!! ++++++++++++++++++++++++++
-    const order = $('#order-number').val()
+    const order = $('#order-select').find(":selected").text();
+    console.log(order)
     $.ajax({
       method: 'POST',
       data: {'id': order},
@@ -54,10 +54,15 @@ $('document').ready(() => {
     .then(items => {
       // idempotent insurance: clear bill of duplicates first
       $('article').children().remove()
-      billTicket(items, '.chit');
+      billTicket(items, '.chit')
     })
-    .catch(err => {console.error('wha happun')})
+    .catch(err => {
+      res
+        .status(500)
+        .json({error: err.message})
+    })
   })
+
 
   //////////////////////////////
   // listener: time-remaining //
@@ -68,14 +73,19 @@ $('document').ready(() => {
   $('#time-remaining-enter').on('click', function(e) {
     e.preventDefault()
     const $num = $minutes.val()
+    $minutes.val('')
     $.ajax({
       method: 'POST',
       url: '/api/chefs/time',
       name: 'time',
       data: {'time': $num}
     })
-    .catch(err => console.error(err.stack))
-  });
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    })
+    });
 
 
     ////////////////////////////
@@ -116,7 +126,15 @@ $('document').ready(() => {
         .json({error: err.message})})
   })
 
+
+
 });
+
+
+
+
+
+
 
 
 
