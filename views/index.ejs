@@ -33,9 +33,12 @@
         </span>
       </div>
       <div class="right-bar">
-        <span>
-          <button id="menu-button">Login</button>
-        </span>
+        <form class="form-inline" action="/:id" method="GET">
+          <span>
+            <input class="form-control" type="user_id" name="user_id" placeholder="username" style="width: 100px; height: 30px;">
+            <button id="login-button">Login</button>
+          </span>
+        </form>
       </div>
     </div>
   </nav>

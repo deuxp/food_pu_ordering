@@ -38,12 +38,14 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const itemsRoutes = require("./routes/items");
+const cookieSession = require("cookie-session");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/items", itemsRoutes(db));
+app.use(cookieSession({ name: "session", secret: "purple" }));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -54,9 +56,9 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get('/login/:id', (req, res) => {
+app.get('/:id', (req, res) => {
   req.session.user_id = req.params.id;
-  res.redirect('/');
+  res.redirect('/api/items');
 });
 
 app.listen(PORT, () => {

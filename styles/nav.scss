@@ -21,9 +21,9 @@ nav {
   background-size: 60px 60px;
 }
 
-#menu-button {
+#login-button {
   height: 40px;
-  width: 80px;
+  width: 70px;
 }
 
 .links {
@@ -38,6 +38,10 @@ nav {
 .left-bar {
   display: flex;
   align-items: center;
+}
+
+.right-bar {
+  display: flex;
 }
 
 .left-links {
