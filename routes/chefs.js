@@ -44,13 +44,20 @@ module.exports = (db) => {
   // GET: render chefs page //
   ////////////////////////////
 
+
+  // may have to get session id from req header to pass to the nav
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM items`;
-    console.log('this is the chefs page');
+    let query = `SELECT id FROM orders WHERE status = 'pending';`;
     db.query(query)
       .then(data => {
-        const items = data.rows;
-        res.render("chefs");
+        const orderList = []
+        data.rows.forEach(item => {
+          orderList.push(item.id)
+        });
+        const templateVars = {orderList: orderList};
+        console.log(templateVars)
+        res
+          .render("chefs", templateVars);
       })
       .catch(err => {
         res
@@ -59,6 +66,7 @@ module.exports = (db) => {
       });
 
   });
+
 
   ////////////////////////
   // POST: order number //
