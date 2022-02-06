@@ -3,18 +3,51 @@ nav {
   width: 100%;
   background-color: #FACD60;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 1.5em;
 }
 
 #logo {
   font-family: 'Lato', sans-serif;
-  font-weight: bold;
+  font-weight: 900;
   font-style: italic;
   font-size: 20px;
+  padding-right: 1.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-image: url("https://cdn-icons.flaticon.com/png/512/566/premium/566651.png?token=exp=1644015155~hmac=bb693d73286ca07c08034523aa68049d");
+  background-repeat: no-repeat;
+  background-size: 60px 60px;
 }
 
-#menu-button {
-  height: 50px;
+#login-button {
+  height: 40px;
+  width: 70px;
+}
+
+.links {
+  background-color: #1AC0C6;
+  padding: 1em;
+  font-family: 'Lato', sans-serif;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-bar {
+  display: flex;
+  align-items: center;
+}
+
+.right-bar {
+  display: flex;
+}
+
+.left-links {
+  width: 275px;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.5;
+  font-weight: bold;
 }
