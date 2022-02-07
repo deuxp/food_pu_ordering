@@ -76,14 +76,14 @@ $(document).ready(function () {
 
     console.log('total', total);
     const elem = `<tr>
-    <td>sub-total</td>
+    <td>Sub-total</td>
     <td>$ ${total} </td>
     </tr>
     <tr>
-    <td>tax</td>
+    <td>Tax</td>
     <td>$ ${(total*(0.15)).toFixed(2)} </td>
     </tr><tr>
-    <td>sub-total</td>
+    <td>Total </td>
     <td>$ ${(total*(1.15)).toFixed(2)} </td>
     </tr>
     `
