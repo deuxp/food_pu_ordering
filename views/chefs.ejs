@@ -34,16 +34,7 @@
 
   <main class="chef-container">
 
-    <article class="chit hidden">
-
-      <!-- template make a helper function-->
-      <!-- <div class="order-view">
-        <div class="food-name">burger-patty melt</div>
-        <div class="food-instructions"> </div>
-        <div class="food-qty">qty: 2</div>
-      </div> -->
-
-    </article>
+    <article class="chit hidden"></article>
 
 
     <div class="status-entry">
@@ -58,13 +49,18 @@
       </div>
 
       <!-- pick up time _> sends SMS-->
-      <div class="pickup">
-        <form>
-          <label for="pickup">how long ?</label>
-          <input type="text" name="pickup" class="time-remaining">
-          <button type="submit" class="time-remaining-button">enter</button>
-        </form>
+      <div class="minue-entry">
+        <div class="entry-container">
+          <label for="minutes">Minutes:</label>
+          <input type="number" id="minutes" name="minutes"
+                 min="1" max="180">
 
+          <div class="button-cup">
+            <button id="five-button">+5</button>
+            <button id="ten-button">+10</button>
+          </div>
+        </div>
+          <button id="time-remaining-enter">enter</button>
       </div>
 
       <!-- ready button -- a form with no field -->
