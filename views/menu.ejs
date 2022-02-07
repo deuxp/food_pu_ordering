@@ -32,7 +32,7 @@
       </div>
       <div class="menu-item-details-left-bottom">
         <output class="menu-item-price" name=<%= item.price %> > $<%= item.price/100 %></output>
-        <button class= "menu-button" id="button<%= count %>" >  + add - </button>
+        <button class= "menu-button" id="button<%= count %>" > add item +  </button>
       </div>
       </div>
       <div class="menu-item-details-right-picture">
@@ -42,16 +42,21 @@
   </section>
   <% }; %>
 </div>
-<div class="order-tally">
-  <table id="table-ordered-items" >
+<div id="order-summary">
+  <table id="ordered-items" >
     <tr>
       <th> Name </th>
       <th> Quantity </th>
       <th> Price </th>
     </tr>
   </table>
+  <div class="order-summary-bottom">
+  <table id="order-totals" >
+
+  </table>
+<button> place order</button>
+</div>
 </div>
   </main>
-
 </body>
 </html>
