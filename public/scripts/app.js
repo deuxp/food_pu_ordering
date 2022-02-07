@@ -8,7 +8,9 @@ $(document).ready(function () {
     const price = $(this).siblings('.menu-item-price')[0].name;
     const name = $(this).parent().parent().children('.menu-item-details-left-top').children('.menu-item-name').text();
 
-    addItemsToInvoice(trackOrderedItems(this.id, name, price), '#table-ordered-items');
+    renderItemsToInvoice(trackOrderedItems(this.id, name, price), '#ordered-items');
+
+    renderTotals(orderedItems,'#order-totals');
   });
 
   const doesItemExist = function (buttonID, orderedItems) {
@@ -40,7 +42,7 @@ $(document).ready(function () {
     return orderedItems;
   };
 
-  const addItemsToInvoice = function (items, element) {
+  const renderItemsToInvoice = function (items, element) {
     $(element).children().remove()
     items.forEach( (item, index) => {
       let elem =``;
@@ -58,8 +60,33 @@ $(document).ready(function () {
       </tr>`;
       $(element).append(elem)
     })
-
   };
 
+  const renderTotals = function(items, element) {
+    $(element).children().remove();
 
+    let total = 0;
+
+    items.forEach( item => {
+      total += item["content"].quantity*item["content"].price/100;
+    })
+
+    //round total to 2 decimal places
+    total = total.toFixed(2);
+
+    console.log('total', total);
+    const elem = `<tr>
+    <td>sub-total</td>
+    <td>$ ${total} </td>
+    </tr>
+    <tr>
+    <td>tax</td>
+    <td>$ ${(total*(0.15)).toFixed(2)} </td>
+    </tr><tr>
+    <td>sub-total</td>
+    <td>$ ${(total*(1.15)).toFixed(2)} </td>
+    </tr>
+    `
+    $(element).append(elem)
+  }
 });
