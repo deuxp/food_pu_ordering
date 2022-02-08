@@ -1,3 +1,4 @@
+// const res = require("express/lib/response");
 
 $('document').ready(() => {
 
@@ -142,6 +143,28 @@ $('document').ready(() => {
         .status(500)
         .json({error: err.message})})
   })
+
+
+    //////////////////////////
+    // Listener: order PAID //
+    //////////////////////////
+
+    $('.paid-button').on('click', e => {
+      e.preventDefault()
+      const $order = $('#order-select').find(":selected").text();
+
+      $.ajax('/api/chefs/paid', {
+        method: 'POST',
+        data: {'order': $order},
+        success: location.reload()
+       })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message })
+        })
+    })
+
 
 });
 

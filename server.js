@@ -42,10 +42,10 @@ const cookieSession = require("cookie-session");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
+app.use(cookieSession({ name: "session", secret: "purple" }));
 app.use("/api/users", usersRoutes(db));
 app.use("/api/chefs", chefRoutes(db));
 app.use("/api/items", itemsRoutes(db));
-app.use(cookieSession({ name: "session", secret: "purple" }));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -53,13 +53,10 @@ app.use(cookieSession({ name: "session", secret: "purple" }));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  const templateVars = {user_id: null}
+  res.render("index", templateVars);
 });
 
-app.get('/:id', (req, res) => {
-  req.session.user_id = req.params.id;
-  res.redirect('/api/items');
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

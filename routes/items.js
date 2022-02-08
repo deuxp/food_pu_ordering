@@ -7,11 +7,11 @@ module.exports = (db) => {
     db.query(`SELECT * FROM items;`)
       .then(data => {
         const items = data.rows;
+        const { user_id } = req.session
         const templateVars = {
-          items: items
+          items: items,
+          user_id
         }
-        console.log(templateVars.items[0]);
-        //res.json({ users });
         res.render("menu", templateVars);
       })
       .catch(err => {
