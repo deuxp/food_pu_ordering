@@ -7,12 +7,12 @@ main.menu-container {
 
 section.menu-item {
   display: flex;
-  flex: center;
+  flex-direction: column ;
   border-style: ridge;
   margin: 0.5em 1em
 }
 
-.menu-item-details {
+.menu-item-top {
   display: flex;
 }
 .menu-item-details-left {
@@ -28,4 +28,12 @@ section.menu-item {
   display:flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.menu-item-bottom {
+  background-color: antiquewhite;
+}
+
+#instructions {
+  width: 98%;
 }
