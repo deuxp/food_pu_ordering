@@ -1,12 +1,11 @@
 
 const express = require('express');
-const { send } = require('express/lib/response');
+const { send, redirect } = require('express/lib/response');
 const router  = express.Router();
 require('dotenv').config()
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-// const myPhone = process.env.PHONE_RECIEVE;
 const twilio = process.env.PHONE_TWILIO;
 const client = require('twilio')(accountSid, authToken);
 
@@ -45,7 +44,6 @@ module.exports = (db) => {
   ////////////////////////////
 
 
-  // may have to get session id from req header to pass to the nav
   router.get("/", (req, res) => {
     let query = `SELECT id FROM orders WHERE status = 'pending';`;
     db.query(query)
@@ -74,7 +72,7 @@ module.exports = (db) => {
 
   router.post('/pending', (req, res) => {
 
-    const { order } = req.body
+    const { order } = req.body;
 
     let query = `SELECT orders.id, items.name, modification, qty, time, users.name as customer
     FROM order_items
@@ -84,7 +82,7 @@ module.exports = (db) => {
     where orders.id = $1;`
 
     db.query(query, [order])
-    .then(data => {
+      .then(data => {
         return res.send(data.rows)
       })
   });
@@ -96,10 +94,7 @@ module.exports = (db) => {
 
   router.post('/time', (req, res) => {
     const { time } = req.body;
-    // grab the order id
     const { order } = req.body;
-    // console.log(orderID) // works - recieves order id
-    // query the phone of the user with the order_id
     const query = `
     SELECT phone
     FROM orders
@@ -116,13 +111,9 @@ module.exports = (db) => {
     })
     .catch(err => {
       res
-          .status(500)
-          .json({ error: err.message });
+        .status(500)
+        .json({ error: err.message });
     })
-    // // refactor the sendSMS(message, phone) to take in a phone
-    // // pass the phone into the sendSMS(message, phone)
-
-    // // do the same for the READY! button
   })
 
 
@@ -131,11 +122,7 @@ module.exports = (db) => {
   //////////////////////////
 
   router.post('/ping', (req, res) => {
-
-    // grab the order id
     const { order } = req.body;
-    // console.log(orderID) // works - recieves order id
-    // query the phone of the user with the order_id
     const query = `
     SELECT phone
     FROM orders
@@ -145,13 +132,33 @@ module.exports = (db) => {
     db.query(query, [order])
     .then(number => {
       const { phone } = number.rows[0];
-      console.log(phone)
+      console.log(phone) // test data: shows that different orders dial a customers phone#
       const message = 'Your delicious order is ready for pick up. See you soon!';
       sendSMS(message, phone);
     })
-
-
   })
+
+
+  ////////////////
+  // POST: PAID //
+  ////////////////
+
+  router.post('/paid', (req, res) => {
+    const { order } = req.body;
+    const query = `
+    UPDATE orders
+    SET status = 'paid'
+    WHERE orders.id = $1;
+    `;
+
+    db.query(query, [order])
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message })
+      })
+  })
+
 
   return router;
 };
