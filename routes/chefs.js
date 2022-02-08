@@ -74,7 +74,7 @@ module.exports = (db) => {
 
   router.post('/pending', (req, res) => {
 
-    const order = req.body.id
+    const { order } = req.body
 
     let query = `SELECT orders.id, items.name, modification, qty
     FROM order_items
@@ -94,9 +94,9 @@ module.exports = (db) => {
   /////////////////////////////////////
 
   router.post('/time', (req, res) => {
-    const time = req.body.time;
+    const { time } = req.body;
     // grab the order id
-    const orderID = req.body.order;
+    const { order } = req.body;
     // console.log(orderID) // works - recieves order id
     // query the phone of the user with the order_id
     const query = `
@@ -105,9 +105,11 @@ module.exports = (db) => {
     JOIN users on customer_id = users.id
     WHERE orders.id = $1;`
 
-    db.query(query, [orderID])
+    db.query(query, [order])
     .then(number => {
-      const phone = number.rows[0].phone
+      const { phone } = number.rows[0]
+      console.log(order)
+      console.log(phone)
       const message = `Your amazing meal will be ready for pickup in approx. ${time} minutes.`;
       sendSMS(message, phone);
     })
@@ -130,7 +132,7 @@ module.exports = (db) => {
   router.post('/ping', (req, res) => {
 
     // grab the order id
-    const orderID = req.body.id;
+    const { order } = req.body;
     // console.log(orderID) // works - recieves order id
     // query the phone of the user with the order_id
     const query = `
@@ -139,9 +141,9 @@ module.exports = (db) => {
     JOIN users on customer_id = users.id
     WHERE orders.id = $1;`
 
-    db.query(query, [orderID])
+    db.query(query, [order])
     .then(number => {
-      const phone = number.rows[0].phone;
+      const { phone } = number.rows[0];
       console.log(phone)
       const message = 'Your delicious order is ready for pick up. See you soon!';
       sendSMS(message, phone);
