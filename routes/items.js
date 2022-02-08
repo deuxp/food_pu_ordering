@@ -23,9 +23,11 @@ module.exports = (db) => {
 
   // *** needs to be completed ***
   // create order in database using INSERT
-  // once order is created and ID of order is returned, create rows on order_items table based on data held by cartItems
+  // once order is created and ID of order is returned,
+  // INSERT rows on order_items table based on data held by cartItems
   // then send text to restaurant
   // some indicator of success should be sent to client page?
+  // it may be better to split into two functions/endpoints for handling DB queries???
   router.post('/orders', (req,res) => {
 
     res.json(req.body);
