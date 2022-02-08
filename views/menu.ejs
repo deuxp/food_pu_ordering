@@ -38,7 +38,7 @@
                     </div>
                     <div class="menu-item-details-left-bottom">
                       <output class="menu-item-price" name=<%=item.price %> > $<%= item.price/100 %></output>
-                      <button type="button" hidden class="menu-button" id="button<%= count %>"> add item + </button>
+                      <button type="button" hidden class="menu-button"> add item + </button>
                     </div>
                   </div>
                   <div class="menu-item-details-right-picture">
@@ -48,11 +48,11 @@
                 <div class="menu-item-bottom">
                   <textarea name="instructions" id="instructions"
                     placeholder="Special instructions for the restaurant?"></textarea>
-                  <form>
+                  <div>
                     <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="0" max="20">
-                    <button>Add to Cart</button>
-                  </form>
+                    <input class="quantity" type="number" id="quantity" name="quantity" value=1 min=1 max=20>
+                    <button class="add-to-cart-button" id="<%= count %>">Add to Cart</button>
+                  </div>
                 </div>
               </section>
               <% }; %>
