@@ -1,92 +1,95 @@
 // Client facing scripts here
 $(document).ready(function () {
 
-  let orderedItems = [];
+  let cartItems = [];
 
-  $(".menu-button").on("click", function (event) {
-    //const price = $(this).siblings('.menu-item-price').text();
-    const price = $(this).siblings('.menu-item-price')[0].name;
-    const name = $(this).parent().parent().children('.menu-item-details-left-top').children('.menu-item-name').text();
+  $(".add-to-cart-button").on("click", function () {
+    const quantity = ($(this).siblings('.quantity')[0].value);
+    const name = $(this).parent().parent().parent().find(".menu-item-name")[0].innerText;
+    const description = $(this).parent().parent().parent().find(".menu-item-description")[0].innerText;
+    const price = $(this).parent().parent().parent().find(".menu-item-price")[0].name;
+    const instructions = $(this).parent().parent().find("#instructions").val();
+    //  "Add to Cart" buttons have ID's assigned to them based on their order starting from 1. mid == "menu id"
+    const mid = this.id;
+    // create object to hold all item data
+    const item = { mid, name, description, price, instructions, quantity };
+    cartItems.push(item);
 
-    renderItemsToInvoice(trackOrderedItems(this.id, name, price), '#ordered-items');
+    renderCart(cartItems, '#ordered-items');
 
-    renderTotals(orderedItems,'#order-totals');
-  });
+    renderCartTotals(cartItems, '#order-totals');
+  })
 
-  const doesItemExist = function (buttonID, orderedItems) {
-    let exists = false;
-    orderedItems.forEach(item => {
-      if (item["content"].id === buttonID) {
-        exists = true;
-      }
-    })
-    return exists;
-  };
-
-  const trackOrderedItems = function(buttonID, name, price) {
-
-    const itemExists = doesItemExist(buttonID, orderedItems);
-
-    if (itemExists) {
-      orderedItems.forEach((item, index) => {
-        if (item["content"].id === buttonID) {
-          // what is the current number of items
-          const numOfItems = item["content"].quantity
-          orderedItems[index]["content"].quantity = numOfItems + 1;
-        }
-      })
-    }
-    else {
-      orderedItems.push({ content: { id: buttonID, name: name, price: price, quantity: 1 } })
-    }
-    return orderedItems;
-  };
-
-  const renderItemsToInvoice = function (items, element) {
+  const renderCart = function (items, element) {
     $(element).children().remove()
-    items.forEach( (item, index) => {
-      let elem =``;
+    items.forEach((item, index) => {
+      let elem = ``;
       if (index === 0) {
         elem = `<tr>
         <th> Name </th>
         <th> Quantity </th>
         <th> Price </th>
+        <th> Special Instuctions </th>
+        <th> Remove </th>
       </tr>`
       }
       elem += `<tr>
-      <td>${item["content"].name}</td>
-      <td>${item["content"].quantity}</td>
-      <td>$${item["content"].price/100}</td>
+      <td>${item.name}</td>
+      <td>${item.quantity}</td>
+      <td>$${item.price / 100}</td>
+      <td>${item.instructions}</td>
+      <td> <button class="remove-button"> X </button> </td>
       </tr>`;
       $(element).append(elem)
     })
-  };
+  }
 
-  const renderTotals = function(items, element) {
+  const renderCartTotals = function (items, element) {
+    // clear table element
     $(element).children().remove();
-
     let total = 0;
-
-    items.forEach( item => {
-      total += item["content"].quantity*item["content"].price/100;
+    // iterate through items to find total price in dollars
+    items.forEach(item => {
+      total += item.quantity * item.price / 100;
     })
-
     //round total to 2 decimal places
     total = total.toFixed(2);
-
-    console.log('total', total);
+    // create HTML table element
     const elem = `<tr>
     <td>Sub-total</td>
     <td>$ ${total} </td>
     </tr>
     <tr>
     <td>Tax</td>
-    <td>$ ${(total*(0.15)).toFixed(2)} </td>
+    <td>$ ${(total * (0.15)).toFixed(2)} </td>
     </tr><tr>
     <td>Total </td>
-    <td>$ ${(total*(1.15)).toFixed(2)} </td>
+    <td>$ ${(total * (1.15)).toFixed(2)} </td>
     </tr>
     `
     $(element).append(elem)
   }
+
+  $("#ordered-items").on("click", ".remove-button", function () {
+    // rowIndex value of table row object in Cart. 1 is the first remove (X) button and so on...
+    const rowIndex = $(this).parent().parent()[0].rowIndex
+    console.log(rowIndex);
+    //mutate cartItems to remove index = rowIndex -1
+    cartItems.splice(rowIndex - 1, 1)
+    // need to re-do Cart View
+    renderCart(cartItems, '#ordered-items');
+
+    renderCartTotals(cartItems, '#order-totals');
+  })
+
+// needs to be completed
+// send below data
+
+  $('#place-order-button').on('click', function (event) {
+    //event.preventDefault()
+
+    $.post('/api/items/orders', { 'restaurant_id': 1, 'customer_id': 1, 'tip': 0, 'order' : cartItems })
+
+  });
+
 });
