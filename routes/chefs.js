@@ -6,7 +6,7 @@ require('dotenv').config()
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const myPhone = process.env.PHONE_RECIEVE;
+// const myPhone = process.env.PHONE_RECIEVE;
 const twilio = process.env.PHONE_TWILIO;
 const client = require('twilio')(accountSid, authToken);
 
@@ -24,12 +24,12 @@ module.exports = (db) => {
    * Author: Gottfried Kleinberger
    * @param {''} message Sent over SMS
    */
-   const sendSMS = message => {
+   const sendSMS = (message, phone) => {
     client.messages
     .create({
       body: message,
       from: twilio,
-      to: myPhone
+      to: phone
     })
     .then(message => console.log(message.sid))
     .catch(err => {
@@ -44,13 +44,20 @@ module.exports = (db) => {
   // GET: render chefs page //
   ////////////////////////////
 
+
+  // may have to get session id from req header to pass to the nav
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM items`;
-    console.log('this is the chefs page');
+    let query = `SELECT id FROM orders WHERE status = 'pending';`;
     db.query(query)
       .then(data => {
-        const items = data.rows;
-        res.render("chefs");
+        const orderList = []
+        data.rows.forEach(item => {
+          orderList.push(item.id)
+        });
+        const templateVars = {orderList: orderList};
+        console.log(templateVars)
+        res
+          .render("chefs", templateVars);
       })
       .catch(err => {
         res
@@ -59,6 +66,7 @@ module.exports = (db) => {
       });
 
   });
+
 
   ////////////////////////
   // POST: order number //
@@ -87,8 +95,31 @@ module.exports = (db) => {
 
   router.post('/time', (req, res) => {
     const time = req.body.time;
-    const message = `Your amazing meal will be ready for pickup in approx. ${time} minutes.`;
-    sendSMS(message);
+    // grab the order id
+    const orderID = req.body.order;
+    // console.log(orderID) // works - recieves order id
+    // query the phone of the user with the order_id
+    const query = `
+    SELECT phone
+    FROM orders
+    JOIN users on customer_id = users.id
+    WHERE orders.id = $1;`
+
+    db.query(query, [orderID])
+    .then(number => {
+      const phone = number.rows[0].phone
+      const message = `Your amazing meal will be ready for pickup in approx. ${time} minutes.`;
+      sendSMS(message, phone);
+    })
+    .catch(err => {
+      res
+          .status(500)
+          .json({ error: err.message });
+    })
+    // // refactor the sendSMS(message, phone) to take in a phone
+    // // pass the phone into the sendSMS(message, phone)
+
+    // // do the same for the READY! button
   })
 
 
@@ -97,8 +128,26 @@ module.exports = (db) => {
   //////////////////////////
 
   router.post('/ping', (req, res) => {
-    const message = 'Your delicious order is ready for pick up. See you soon!';
-    sendSMS(message);
+
+    // grab the order id
+    const orderID = req.body.id;
+    // console.log(orderID) // works - recieves order id
+    // query the phone of the user with the order_id
+    const query = `
+    SELECT phone
+    FROM orders
+    JOIN users on customer_id = users.id
+    WHERE orders.id = $1;`
+
+    db.query(query, [orderID])
+    .then(number => {
+      const phone = number.rows[0].phone;
+      console.log(phone)
+      const message = 'Your delicious order is ready for pick up. See you soon!';
+      sendSMS(message, phone);
+    })
+
+
   })
 
   return router;

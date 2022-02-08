@@ -40,12 +40,20 @@
     <div class="status-entry">
 
       <!-- PENDING: route to /pending of chefsPage.js will take care of twilio -->
-      <div class="pending">
-        <form>
+      <div class="order-select-container">
+        <!-- <form>
           <label for="order">order #</label>
           <input type="text" name="order" id="order-number">
-          <button type="submit" class="pending-button">enter</button>
-        </form>
+        </form> -->
+        <label for="order-select">ORDER #</label>
+        <select name="order-select" id="order-select">
+
+          <% orderList.forEach(order => { %>
+            <option value=""> <%= order %> </option>
+            <% }) %>
+          </select>
+          <button type="submit" class="pending-button">order up</button>
+
       </div>
 
       <!-- pick up time _> sends SMS-->
@@ -60,7 +68,7 @@
             <button id="ten-button">+10</button>
           </div>
         </div>
-          <button id="time-remaining-enter">enter</button>
+          <button id="time-remaining-enter">Send</button>
       </div>
 
       <!-- ready button -- a form with no field -->

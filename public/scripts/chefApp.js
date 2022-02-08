@@ -17,7 +17,7 @@ $('document').ready(() => {
     // need to sanitize STILL!! ++++++++++++++++++++++++++
     const elem = `<div class="order-view">
     <div class="food-name">${item.name}</div>
-    <div class="food-instructions">${item.modification}</div>
+    <div class="food-instructions">${item.modification || ''}</div>
     <div class="food-qty">qty: ${item.qty}</div>
     </div>`;
     $(element).append(elem)
@@ -35,6 +35,21 @@ $('document').ready(() => {
     });
   };
 
+
+  //////////////////////
+  // GLOBAL VARIABLES //
+  //////////////////////
+
+  // current order
+  const $order = $('#order-select').find(":selected").text();
+  // input - minute entry
+  const $minutes = $('#minutes')
+
+
+
+
+
+
   /////////////////////////////
   // Listener: Pending Order //
   /////////////////////////////
@@ -42,9 +57,9 @@ $('document').ready(() => {
   $('.pending-button').on('click', e => {
     e.preventDefault()
     $('article').removeClass('hidden')
-
     // need to sanitize STILL!! ++++++++++++++++++++++++++
-    const order = $('#order-number').val()
+    const order = $('#order-select').find(":selected").text();
+    console.log(order)
     $.ajax({
       method: 'POST',
       data: {'id': order},
@@ -54,62 +69,73 @@ $('document').ready(() => {
     .then(items => {
       // idempotent insurance: clear bill of duplicates first
       $('article').children().remove()
-      billTicket(items, '.chit');
+      billTicket(items, '.chit')
     })
-    .catch(err => {console.error('wha happun')})
+    .catch(err => {
+      res
+        .status(500)
+        .json({error: err.message})
+    })
   })
+
 
   //////////////////////////////
   // listener: time-remaining //
   //////////////////////////////
-  const $minutes = $('#minutes')
 
 
   $('#time-remaining-enter').on('click', function(e) {
     e.preventDefault()
+    // $minutes is a global variable
     const $num = $minutes.val()
+    $minutes.val('')
     $.ajax({
       method: 'POST',
       url: '/api/chefs/time',
       name: 'time',
-      data: {'time': $num}
+    // $order is a global variable
+      data: {'time': $num, 'order': $order}
     })
-    .catch(err => console.error(err.stack))
-  });
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    })
+    });
 
 
     ////////////////////////////
     // Listener:#five-button //
-    ////////////////////////////
+    ///////////////////////////
 
   $('#five-button').on('click', () => {
+    // $minutes is a global variable
     let $num = $minutes.val()
     $num = Number($num) + Number(5)
     $minutes.val($num)
   });
 
 
-    ////////////////////////////
+    //////////////////////////
     // Listener:#ten-button //
-    ////////////////////////////
+    //////////////////////////
 
   $('#ten-button').on('click', () => {
+    // $minutes is a global variable
     let $num = $minutes.val()
     $num = Number($num) + Number(10)
     $minutes.val($num)
   });
 
 
-  ////////////////////////////
-  // Listener: order READY! //
-  ////////////////////////////
+    ////////////////////////////
+    // Listener: order READY! //
+    ////////////////////////////
 
   $('.ready-button').on('click', e => {
     e.preventDefault();
-    $.ajax('/api/chefs/ping', { method: 'POST' })
-      .then(data => {
-        console.log(data)
-      })
+    // $order is a global variable
+    $.ajax('/api/chefs/ping', { method: 'POST', data: {'id': $order} })
       .catch(err => {
         res
         .status(500)
@@ -117,6 +143,12 @@ $('document').ready(() => {
   })
 
 });
+
+
+
+
+
+
 
 
 
