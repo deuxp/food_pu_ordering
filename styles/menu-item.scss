@@ -1,7 +1,6 @@
 
-main.menu-item {
+main.menu-container {
   display:flex;
-  flex-direction: column;
   justify-content: center;
   margin: auto;
 }
@@ -9,6 +8,8 @@ main.menu-item {
 section.menu-item {
   display: flex;
   flex: center;
+  border-style: ridge;
+  margin: 0.5em 1em
 }
 
 .menu-item-details {
@@ -20,5 +21,11 @@ section.menu-item {
 
 .menu-item-details-left-bottom {
   display:  flex;
+  justify-content: space-between;
+}
+
+#order-summary {
+  display:flex;
+  flex-direction: column;
   justify-content: space-between;
 }

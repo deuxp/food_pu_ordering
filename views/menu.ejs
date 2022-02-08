@@ -10,13 +10,16 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
   <link rel="stylesheet" href="/styles/menu-item.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 <body>
-  <main class="menu-item">
+  <%- include('partials/_nav') %>
+  <main class="menu-container">
+    <div class="menu-items">
     <% let count = 0; %>
     <% for (let item of items) { %>
       <% count++; %>
@@ -28,8 +31,8 @@
         <p class="menu-item-description"> <%= item.description %> </p>
       </div>
       <div class="menu-item-details-left-bottom">
-        <p class="menu-item-price"> $<%= item.price/100 %></p>
-        <button class= "menu-button" id="button<%= count %>" >  + add - </button>
+        <output class="menu-item-price" name=<%= item.price %> > $<%= item.price/100 %></output>
+        <button class= "menu-button" id="button<%= count %>" > add item +  </button>
       </div>
       </div>
       <div class="menu-item-details-right-picture">
@@ -38,15 +41,22 @@
     </div>
   </section>
   <% }; %>
-  </main>
-
-  <table id="#table-ordered-items" >
+</div>
+<div id="order-summary">
+  <table id="ordered-items" >
     <tr>
       <th> Name </th>
       <th> Quantity </th>
+      <th> Price </th>
     </tr>
   </table>
+  <div class="order-summary-bottom">
+  <table id="order-totals" >
 
-
+  </table>
+<button> place order</button>
+</div>
+</div>
+  </main>
 </body>
 </html>
