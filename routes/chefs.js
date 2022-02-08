@@ -76,10 +76,11 @@ module.exports = (db) => {
 
     const { order } = req.body
 
-    let query = `SELECT orders.id, items.name, modification, qty
+    let query = `SELECT orders.id, items.name, modification, qty, time, users.name as customer
     FROM order_items
     JOIN orders ON orders.id = order_id
     JOIN items ON item_id = items.id
+    JOIN users ON customer_id = users.id
     where orders.id = $1;`
 
     db.query(query, [order])
