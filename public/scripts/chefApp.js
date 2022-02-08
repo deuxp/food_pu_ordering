@@ -62,7 +62,7 @@ $('document').ready(() => {
     console.log(order)
     $.ajax({
       method: 'POST',
-      data: {'id': order},
+      data: {'order': order},
       url: '/api/chefs/pending',
       name: 'pending'
     })
@@ -86,8 +86,11 @@ $('document').ready(() => {
 
   $('#time-remaining-enter').on('click', function(e) {
     e.preventDefault()
-    // $minutes is a global variable
+    // $minutes is a global variable ?? but it shouldnt be
+    const $order = $('#order-select').find(":selected").text();
+    const $minutes = $('#minutes')
     const $num = $minutes.val()
+
     $minutes.val('')
     $.ajax({
       method: 'POST',
@@ -135,7 +138,8 @@ $('document').ready(() => {
   $('.ready-button').on('click', e => {
     e.preventDefault();
     // $order is a global variable
-    $.ajax('/api/chefs/ping', { method: 'POST', data: {'id': $order} })
+    const $order = $('#order-select').find(":selected").text();
+    $.ajax('/api/chefs/ping', { method: 'POST', data: {'order': $order} })
       .catch(err => {
         res
         .status(500)
