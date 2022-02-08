@@ -8,6 +8,7 @@
   height: 100%;
   font-family: "Lato", sans-serif;
   justify-content: space-around;
+  background-color: #FB7756;
 }
 
 .chit {
@@ -59,7 +60,7 @@
 
 .status-entry {
   display: flex;
-  background-color: rgb(163, 155, 135);
+  background-color: white;
   width: 40%;
   height: 100%;
   padding: 1em;
@@ -67,6 +68,17 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-end;
+  border-radius: 7px;
+}
+
+
+
+.order {
+  background-color: white;
+  width: 60%;
+  height: 100%;
+  padding: 1em;
+  margin: 1em;
   border-radius: 7px;
 }
 
@@ -83,4 +95,42 @@
 
 .hidden {
   display: none;
+}
+
+
+
+button {
+  color: white;
+  background-color: #E74645;
+  border-color: #E74645;
+}
+
+
+
+.order-select-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.minute-entry {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .entry-container {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+
+    .button-cup {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.25em;
+    }
+  }
+
+  #time-remaining-enter {
+    padding: 0.25em;
+  }
 }

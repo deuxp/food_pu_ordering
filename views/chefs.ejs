@@ -23,19 +23,15 @@
 
 <body>
 
-  <nav>
-    <span id="logo">YUMRs</span>
-    <div class="left-bar">
-      <span id="new-tweet">
-        <button id="menu-button">menu</button>
-      </span>
-    </div>
-  </nav>
+  <%- include('partials/_nav') %>
 
   <main class="chef-container">
 
     <article class="chit hidden"></article>
 
+    <div class="order">
+      <p>Order</p>
+    </div>
 
     <div class="status-entry">
 
@@ -57,7 +53,7 @@
       </div>
 
       <!-- pick up time _> sends SMS-->
-      <div class="minue-entry">
+      <div class="minute-entry">
         <div class="entry-container">
           <label for="minutes">Minutes:</label>
           <input type="number" id="minutes" name="minutes"
