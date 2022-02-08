@@ -13,6 +13,15 @@ $(document).ready(function () {
     renderTotals(orderedItems,'#order-totals');
   });
 
+  $(".add-to-cart-button").on("click", function(event){
+    //console.log("I am clicked!")
+    const quantity = ($(this).siblings('.quantity')[0].value);
+    const name = $(this).parent().parent().parent().find(".menu-item-name")[0].innerText;
+    const description = $(this).parent().parent().parent().find(".menu-item-description")[0].innerText;
+    const price = $(this).parent().parent().parent().find(".menu-item-price")[0].name;
+    const instructions = $(this).parent().parent().find("#instructions").val();
+  })
+
   const doesItemExist = function (buttonID, orderedItems) {
     let exists = false;
     orderedItems.forEach(item => {
