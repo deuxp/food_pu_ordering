@@ -54,7 +54,7 @@ module.exports = (db) => {
         data.rows.forEach(item => {
           orderList.push(item.id)
         });
-        const templateVars = {orderList: orderList};
+        const templateVars = {orderList, user_id: 'Chef'};
         console.log(templateVars)
         res
           .render("chefs", templateVars);
