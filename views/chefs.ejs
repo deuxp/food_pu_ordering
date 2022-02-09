@@ -25,22 +25,16 @@
 
   <%- include('partials/_nav') %>
 
+
   <main class="chef-container">
 
     <article class="chit hidden"></article>
 
-    <div class="order">
-      <p>Order</p>
-    </div>
 
     <div class="status-entry">
-
       <!-- PENDING: route to /pending of chefsPage.js will take care of twilio -->
       <div class="order-select-container">
-        <!-- <form>
-          <label for="order">order #</label>
-          <input type="text" name="order" id="order-number">
-        </form> -->
+
         <label for="order-select">ORDER #</label>
         <select name="order-select" id="order-select">
 
@@ -73,6 +67,8 @@
         <!-- <form action="/chefsPage/ready" method="POST"> -->
 
           <button type="submit" class="ready-button">READY!</button>
+          <button type="submit" class="paid-button">PAID</button>
+
         </form>
       </div>
     </div>
