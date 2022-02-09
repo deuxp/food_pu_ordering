@@ -10,12 +10,24 @@
       </span>
     </div>
     <div class="right-bar">
-      <form class="form-inline" action="/:id" method="GET">
-        <span>
-          <input class="form-control" type="user_id" name="username" placeholder="username" style="width: 100px; height: 30px;">
-          <button id="login-button">Login</button>
-        </span>
-      </form>
+
+
+      <% if(user_id){ %>
+
+        <p class="welcome-user"> Hello again, <%= user_id %>  </p>
+
+      <% } else{ %>
+
+        <form class="form-inline" action="/api/users/login" method="POST">
+          <span>
+            <input class="form-control" type="text" name="username" placeholder="user name" style="width: 100px; height: 30px;">
+            <button id="login-button">Login</button>
+          </span>
+        </form>
+
+      <% } %>
+
+
     </div>
   </div>
 </nav>

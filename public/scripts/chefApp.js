@@ -1,3 +1,4 @@
+// const res = require("express/lib/response");
 
 $('document').ready(() => {
 
@@ -30,23 +31,12 @@ $('document').ready(() => {
    * @param {''} element class or id name you want to append the DOM Elements
    */
   const billTicket = (items, element) => {
+    //
+
     items.forEach(item => {
       billItem(item, element)
     });
   };
-
-
-  //////////////////////
-  // GLOBAL VARIABLES //
-  //////////////////////
-
-  // current order
-  const $order = $('#order-select').find(":selected").text();
-  // input - minute entry
-  const $minutes = $('#minutes')
-
-
-
 
 
 
@@ -57,9 +47,11 @@ $('document').ready(() => {
   $('.pending-button').on('click', e => {
     e.preventDefault()
     $('article').removeClass('hidden')
+
     // need to sanitize STILL!! ++++++++++++++++++++++++++
     const order = $('#order-select').find(":selected").text();
     console.log(order)
+
     $.ajax({
       method: 'POST',
       data: {'order': order},
@@ -68,7 +60,16 @@ $('document').ready(() => {
     })
     .then(items => {
       // idempotent insurance: clear bill of duplicates first
-      $('article').children().remove()
+      $('article')
+        .children()
+        .remove()
+
+      // append a DOM element to: .status-entry
+      $('.chit')
+        .append(` <div class="time-stamp">${items[0].customer}</div>
+                  <div class="time-stamp">${items[0].time}</div>
+        `)
+
       billTicket(items, '.chit')
     })
     .catch(err => {
@@ -86,7 +87,6 @@ $('document').ready(() => {
 
   $('#time-remaining-enter').on('click', function(e) {
     e.preventDefault()
-    // $minutes is a global variable ?? but it shouldnt be
     const $order = $('#order-select').find(":selected").text();
     const $minutes = $('#minutes')
     const $num = $minutes.val()
@@ -96,7 +96,6 @@ $('document').ready(() => {
       method: 'POST',
       url: '/api/chefs/time',
       name: 'time',
-    // $order is a global variable
       data: {'time': $num, 'order': $order}
     })
     .catch(err => {
@@ -112,7 +111,7 @@ $('document').ready(() => {
     ///////////////////////////
 
   $('#five-button').on('click', () => {
-    // $minutes is a global variable
+    const $minutes = $('#minutes')
     let $num = $minutes.val()
     $num = Number($num) + Number(5)
     $minutes.val($num)
@@ -124,7 +123,7 @@ $('document').ready(() => {
     //////////////////////////
 
   $('#ten-button').on('click', () => {
-    // $minutes is a global variable
+    const $minutes = $('#minutes')
     let $num = $minutes.val()
     $num = Number($num) + Number(10)
     $minutes.val($num)
@@ -137,7 +136,6 @@ $('document').ready(() => {
 
   $('.ready-button').on('click', e => {
     e.preventDefault();
-    // $order is a global variable
     const $order = $('#order-select').find(":selected").text();
     $.ajax('/api/chefs/ping', { method: 'POST', data: {'order': $order} })
       .catch(err => {
@@ -145,6 +143,28 @@ $('document').ready(() => {
         .status(500)
         .json({error: err.message})})
   })
+
+
+    //////////////////////////
+    // Listener: order PAID //
+    //////////////////////////
+
+    $('.paid-button').on('click', e => {
+      e.preventDefault()
+      const $order = $('#order-select').find(":selected").text();
+
+      $.ajax('/api/chefs/paid', {
+        method: 'POST',
+        data: {'order': $order},
+        success: location.reload()
+       })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message })
+        })
+    })
+
 
 });
 

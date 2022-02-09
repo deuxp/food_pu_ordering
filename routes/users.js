@@ -6,9 +6,11 @@
  */
 
 const express = require('express');
+const { user } = require('pg/lib/defaults');
 const router  = express.Router();
 
 module.exports = (db) => {
+
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -21,5 +23,21 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
+  // login route
+  router.post('/login', (req, res) => {
+    const { username } = req.body
+    res.redirect(`/api/users/${username}`);
+  })
+
+
+  // set session-cookie
+  router.get('/:id', (req, res) => {
+    req.session.user_id = req.params.id;
+    res.redirect('/api/items')
+  });
+
+
   return router;
 };
