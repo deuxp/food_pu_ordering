@@ -65,8 +65,8 @@
   padding: 1em;
   margin: 1em;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-end;
+  //justify-content: space-around;
+  align-items: center;
   border-radius: 7px;
   margin: auto;
   margin-top: 10px;
@@ -107,13 +107,15 @@ button {
 .order-select-container {
   width: 100%;
   display: flex;
-  //justify-content: space-between;
+  justify-content: space-between;
+  padding: 1em;
 }
 
 .minute-entry {
   width: 100%;
   display: flex;
-  //justify-content: space-between;
+  justify-content: space-between;
+  padding: 1em;
 
   .entry-container {
     //width: 60%;
@@ -130,4 +132,11 @@ button {
   #time-remaining-enter {
     //padding: 0.25em;
   }
+}
+
+.ready {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
 }
