@@ -1,6 +1,6 @@
 .chef-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   align-items: flex-start;
   padding: 1.5em;
   width: 100%;
@@ -13,10 +13,9 @@
 
 .chit {
   display: flex;
-
   background-color: rgb(248, 211, 124);
   border-radius: 5px;
-  width: 50%;
+  width: 100%;
   padding: 1em;
   margin: 1em;
   flex-direction: column;
@@ -61,14 +60,16 @@
 .status-entry {
   display: flex;
   background-color: white;
-  width: 40%;
-  height: 100%;
+  width: 100%;
+  height: 30%;
   padding: 1em;
   margin: 1em;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   align-items: flex-end;
   border-radius: 7px;
+  margin: auto;
+  margin-top: 10px;
 }
 
 
@@ -86,10 +87,6 @@
 
 .pickup-time {
   background-color: green;
-}
-
-.ready {
-  background-color: orange;
 }
 
 
@@ -110,27 +107,27 @@ button {
 .order-select-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
 }
 
 .minute-entry {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
 
   .entry-container {
-    width: 60%;
+    //width: 60%;
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
 
     .button-cup {
       display: flex;
-      justify-content: space-between;
-      padding: 0.25em;
+      //justify-content: space-between;
+      //padding: 0.25em;
     }
   }
 
   #time-remaining-enter {
-    padding: 0.25em;
+    //padding: 0.25em;
   }
 }
