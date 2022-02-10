@@ -23,8 +23,6 @@ $(document).ready(function () {
     cartItems.push(item); // [{}]
 
     renderCart(cartItems, '#ordered-items');
-
-    renderCartTotals(cartItems, '#order-totals');
   })
 
   const renderCart = function (items, element) {
@@ -50,11 +48,7 @@ $(document).ready(function () {
       </tr>`;
       $(element).append(elem)
     })
-  }
 
-  const renderCartTotals = function (items, element) {
-    // clear table element
-    $(element).children().remove();
     let total = 0;
     // iterate through items to find total price in dollars
     items.forEach(item => {
@@ -63,19 +57,25 @@ $(document).ready(function () {
     //round total to 2 decimal places
     total = total.toFixed(2);
     // create HTML table element
-    const elem = `<tr>
-    <td>Sub-total</td>
+    const ele = `
+    <tr> <td> </td> </tr>
+    <tr> <td> </td> </tr>
+    <tr>
+    <td> <strong>Sub-total </strong></td>
+    <td>      </td>
     <td>$ ${total} </td>
     </tr>
     <tr>
-    <td>Tax</td>
+    <td><strong>Tax </strong></td>
+    <td>      </td>
     <td>$ ${(total * (0.15)).toFixed(2)} </td>
     </tr><tr>
-    <td>Total </td>
+    <td><strong>Total </strong> </td>
+    <td>      </td>
     <td>$ ${(total * (1.15)).toFixed(2)} </td>
     </tr>
     `
-    $(element).append(elem)
+    $(element).append(ele)
   }
 
   // the following listener removes items from the cart
@@ -86,9 +86,11 @@ $(document).ready(function () {
     //mutate cartItems to remove index = rowIndex -1
     cartItems.splice(rowIndex - 1, 1)
     // need to re-do Cart View
+    //renderCart(cartItems, '#ordered-items');
+
+    //renderCartTotals(cartItems, '#order-totals');
     renderCart(cartItems, '#ordered-items');
 
-    renderCartTotals(cartItems, '#order-totals');
   })
 
   /** TODO
