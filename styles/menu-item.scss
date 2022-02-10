@@ -3,17 +3,30 @@ main.menu-container {
   display:flex;
   justify-content: center;
   margin: auto;
+  background-color: white;
+  padding: 5em 10em 5em 10em;
+  margin-top: 3em;
 }
 
 section.menu-item {
   display: flex;
   flex-direction: column ;
   border-style: ridge;
-  margin: 0.5em 1em
+  margin: 1.5em;
+}
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/imgs/angle-kitchen-large.jpeg');
+}
+
+button {
+  border-radius: 8px;
 }
 
 .menu-item-top {
   display: flex;
+  padding-left: 1em;
+  padding-top: 1em;
 }
 .menu-item-details-left {
   min-width: 600px;
@@ -24,6 +37,10 @@ section.menu-item {
   justify-content: space-between;
 }
 
+.menu-item-details-right-picture {
+  margin: 0.5em;
+}
+
 #order-summary {
   display:flex;
   flex-direction: column;
@@ -32,6 +49,14 @@ section.menu-item {
 
 .menu-item-bottom {
   background-color: antiquewhite;
+}
+
+#instructions {
+  margin: 0.5em;
+}
+
+.menu-item-bottom-add-to-cart {
+  padding-left: 0.5em;
 }
 
 #instructions {
