@@ -1,19 +1,26 @@
 // Client facing scripts here
 $(document).ready(function () {
 
-  let cartItems = [];
+  let cartItems = []; // [{}]
+  // future: JSON stringify the session cookie data re-assign cart items
+  // renderCart(cartItems, '#ordered-items'); for the future cookie
+  // renderCartTotals(cartItems, '#order-totals'); for the future cookie
+
 
   $(".add-to-cart-button").on("click", function () {
+
+    // when add to cart is pressed all of these items are grabbed
+    // and put into an object
     const quantity = ($(this).siblings('.quantity')[0].value);
     const name = $(this).parent().parent().parent().find(".menu-item-name")[0].innerText;
     const description = $(this).parent().parent().parent().find(".menu-item-description")[0].innerText;
     const price = $(this).parent().parent().parent().find(".menu-item-price")[0].name;
     const instructions = $(this).parent().parent().find("#instructions").val();
-    //  "Add to Cart" buttons have ID's assigned to them based on their order starting from 1. mid == "menu id"
-    const mid = this.id;
+    //  "Add to Cart" buttons have ID's assigned to them based on their order starting from 1. mID == "menu id"
+    const mID = this.id;
     // create object to hold all item data
-    const item = { mid, name, description, price, instructions, quantity };
-    cartItems.push(item);
+    const item = { mID, name, description, price, instructions, quantity };
+    cartItems.push(item); // [{}]
 
     renderCart(cartItems, '#ordered-items');
 
@@ -23,6 +30,7 @@ $(document).ready(function () {
   const renderCart = function (items, element) {
     $(element).children().remove()
     items.forEach((item, index) => {
+
       let elem = ``;
       if (index === 0) {
         elem = `<tr>
@@ -70,6 +78,7 @@ $(document).ready(function () {
     $(element).append(elem)
   }
 
+  // the following listener removes items from the cart
   $("#ordered-items").on("click", ".remove-button", function () {
     // rowIndex value of table row object in Cart. 1 is the first remove (X) button and so on...
     const rowIndex = $(this).parent().parent()[0].rowIndex
@@ -82,14 +91,21 @@ $(document).ready(function () {
     renderCartTotals(cartItems, '#order-totals');
   })
 
-// needs to be completed
-// send below data
-
+  /** TODO
+   * - [X] send info to router
+   *  - [ ] place-order should clear the order list and totals
+   *
+   * then
+   * - [ ] pop up bubble: your order has been placed that dissappears
+   *
+   */
   $('#place-order-button').on('click', function (event) {
-    //event.preventDefault()
-
-    $.post('/api/items/orders', { 'restaurant_id': 1, 'customer_id': 1, 'tip': 0, 'order' : cartItems })
-
+    event.preventDefault();
+    $.post({
+      data: { 'restaurant_id': 1, 'tip': 0, 'order' : cartItems },
+      url: '/api/items/orders'
+    })
+    .catch(err => console.log(err.message))
   });
 
 });
