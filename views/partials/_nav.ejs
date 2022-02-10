@@ -16,13 +16,16 @@
 
       <% if(user_id){ %>
 
-        <p class="welcome-user"> Hello again, <%= user_id %>  </p>
+        <form action="/api/users/logout" method="POST" class="submit-logout form-inline">
+          <label for="logout-button" id="welcome-user"> Hello again, <%= user_id %> </label>
+          <button name="logout-button" id="logout-button">Logout</button>
+        </form>
 
       <% } else{ %>
 
         <form class="form-inline" action="/api/users/login" method="POST">
           <span>
-            <input class="form-control" type="text" name="username" placeholder="user name" style="width: 100px; height: 30px;">
+            <input class="form-control login-input" type="text" name="username" placeholder="user name" style="width: 100px; height: 30px;">
             <button id="login-button">Login</button>
           </span>
         </form>

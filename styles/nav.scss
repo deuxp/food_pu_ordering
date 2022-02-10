@@ -1,7 +1,11 @@
+$yumr-yellow: #FACD60;
+$yumr-blue: #1AC0C6;
+$button-colors: #eb7e18;
+
 nav {
   height: 100px;
   width: 100%;
-  background-color: #FACD60;
+  background-color: $yumr-yellow;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -16,14 +20,34 @@ nav {
   padding-right: 1.5em;
   padding-top: 1em;
   padding-bottom: 1em;
-  background-image: url("https://cdn-icons.flaticon.com/png/512/566/premium/566651.png?token=exp=1644015155~hmac=bb693d73286ca07c08034523aa68049d");
+  // background-image: url("https://cdn-icons.flaticon.com/png/512/566/premium/566651.png?token=exp=1644015155~hmac=bb693d73286ca07c08034523aa68049d");
   background-repeat: no-repeat;
   background-size: 60px 60px;
 }
 
-#login-button {
+#login-button, #logout-button {
   height: 40px;
   width: 70px;
+  transition: background-color 1s, box-shadow 0.5s;
+  &:hover {
+  background-color: $yumr-blue;
+  box-shadow: 5px 5px #383434;
+  color: black;
+  }
+}
+
+#welcome-user {
+  padding-right: 1em;
+  font-family: 'Lato', sans-serif;
+  color: $yumr-yellow;
+  text-shadow: 2px 2px #383434;
+  font-size: 1.5em;
+  animation: welcome-colors 30s infinite;
+}
+
+.login-input {
+  margin-right: 1em;
+  background-color: $yumr-yellow;
 }
 
 .links {
@@ -33,6 +57,7 @@ nav {
   width: 90%;
   display: flex;
   justify-content: space-between;
+  border-radius: 7px;
 }
 
 .left-bar {
@@ -54,10 +79,18 @@ nav {
 
 button {
   color: white;
-  background-color: #E74645;
+  background-color: #eb7e18;
   border-color: #E74645;
+  border-radius: 6px;
 }
 
 a {
   color: black;
+}
+
+@keyframes welcome-colors {
+  0%{color: $yumr-yellow;}
+  50%{color: $button-colors;}
+  100%{color: $yumr-yellow;}
+
 }

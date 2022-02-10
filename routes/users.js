@@ -38,6 +38,11 @@ module.exports = (db) => {
     res.redirect('/api/items')
   });
 
+  // logout
+  router.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    res.redirect('/')
+  })
 
   return router;
 };
