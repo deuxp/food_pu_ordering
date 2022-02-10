@@ -131,9 +131,14 @@ module.exports = (db) => {
       })
       .then(id => {
         // user_id is the customer name
-        const orderMSG = `Hello Chef, ${user_id} has just placed their order.
-        orderID: ${id}`
+        let orderMSG = `Hello Chef, ${user_id} has just placed their order.\n\norderID: ${id}\n- - - - - - -`
 
+        // loop to append order items to the text
+        order.forEach(item => {
+          orderMSG += `\n- ${item.quantity} x ${item.name} ... ${item.instructions || ''}`
+        })
+
+        console.log('\t', orderMSG)
         const confirmationMSG = `Hello ${user_id}, your order has been placed`
 
         // SMS the order to the restaurant // test one at a time sinc it is the same phone#
