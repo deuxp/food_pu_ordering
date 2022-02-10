@@ -22,6 +22,7 @@ module.exports = (db) => {
    *            else the function throws an error.
    * Author: Gottfried Kleinberger
    * @param {''} message Sent over SMS
+   * @param {''} phone send to this number world-format: ie., +1416555000
    */
    const sendSMS = (message, phone) => {
     client.messages
