@@ -1,3 +1,9 @@
+// $eat-now-color: rgb(80, 88, 97);
+// $eat-now-color: rgb(41, 129, 230);
+$eat-now-color: #1AC0C6;
+$yumr-color: #FACD60;
+$yumr-color-dark: rgb(249, 250, 214);
+
 body {
   background-image: url('/assets/imgs/angle-kitchen-large.jpeg');
 }
@@ -12,7 +18,7 @@ body {
 	padding-top: 20vh;
   background-color: black;
   opacity: 0.7;
-  animation: opacity 10s;
+  animation: opacity 5s;
 
 }
 
@@ -29,32 +35,26 @@ body {
 #yumr {
   font-weight: bolder;
 	position: absolute;
-	margin-right: 468px;
-
+	margin-right: 455px;
 	z-index: 3;
-
-  animation: a-pulse 5s infinite, a-yumr 6s;
+  animation: a-pulse 3s infinite, a-yumr 3s;
 
 }
 
 #eat {
-  color: rgba(245, 245, 245, 0.678);
+  color: $eat-now-color;
 	position: absolute;
-  margin-left: 58px;
+  margin-left: 78px;
 	z-index: 2;
-
-	animation-name: a-eat, a-color;
-	animation-duration: 3s;
+	animation: a-eat 0.5s, a-color 6s infinite;
 }
 
 #now {
-  color: rgba(245, 245, 245, 0.678);
+  color: $eat-now-color;
 	position: absolute;
-	margin-left: 473px;
+	margin-left: 493px;
 	z-index: 1;
-
-	animation-name: a-now, a-color;
-	animation-duration: 4s;
+	animation: a-now 1s, a-color 8s infinite;
 }
 
 /* animation name */
@@ -63,27 +63,37 @@ body {
 	100%{opacity: 1;}
 }
 @keyframes a-eat {
-	0%{padding-left: 270px; opacity: 0;}
-	100%{padding-left: 0px; opacity: 1;}
+	0%{padding-left: 300px; opacity: 0;}
+  60%{opacity: 1;}
+
+	100%{padding-left: 0px;}
 }
 @keyframes a-now {
-	0%{padding-left: 260px; opacity: 0;}
-	100%{padding-left: 0px; opacity: 1;}
+	0%{padding-left: 290px; opacity: 0;}
+  70%{opacity: 1;}
+	100%{padding-left: 0px;}
 }
 
 
 @keyframes a-color {
-	0%{color: rgb(80, 88, 97);}
-	100%{color: rgba(245, 245, 245, 0.678);}
+	0%{color: $eat-now-color;}
+	50%{color: rgba(192, 192, 192, 0.678);}
+	100%{color: $eat-now-color;}
 }
 
 @keyframes a-pulse {
-  0%{color: whitesmoke}
-  50%{color: #FACD60}
-  100%{color: whitesmoke}
+  0%{color: $yumr-color-dark;}
+  50%{color: $yumr-color;}
+  100%{color: $yumr-color-dark;}
 }
 
 @keyframes opacity {
   0%{opacity: 0;}
   100%{opacity: 0.7;}
+}
+
+@keyframes pulse-eat-now {
+  0%{color: whitesmoke}
+  50%{color: $eat-now-color}
+  100%{color: whitesmoke}
 }
