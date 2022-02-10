@@ -103,7 +103,8 @@ $(document).ready(function () {
     event.preventDefault();
     $.post({
       data: { 'restaurant_id': 1, 'tip': 0, 'order' : cartItems },
-      url: '/api/items/orders'
+      url: '/api/items/orders',
+      success: location.reload()
     })
     .catch(err => console.log(err.message))
   });
