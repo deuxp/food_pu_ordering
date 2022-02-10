@@ -36,7 +36,7 @@
 
     <div class="status-entry">
       <!-- PENDING: route to /pending of chefsPage.js will take care of twilio -->
-      <div class="order-select-container">
+      <div class="order-select-container" style="width: 30%;">
 
         <label for="order-select">ORDER #</label>
         <select name="order-select" id="order-select">
@@ -45,27 +45,26 @@
             <option value=""> <%= order %> </option>
             <% }) %>
           </select>
-          <button type="submit" class="pending-button">order up</button>
+          <button type="submit" class="pending-button">Order Up</button>
 
       </div>
 
       <!-- pick up time _> sends SMS-->
-      <div class="minute-entry">
+      <div class="minute-entry" style="width: 40%;">
         <div class="entry-container">
           <label for="minutes">Minutes:</label>
-          <input type="number" id="minutes" name="minutes"
+          <input type="number" id="minutes" name="minutes" style="width: 65%;"
                  min="1" max="180">
-
-          <div class="button-cup">
-            <button id="five-button">+5</button>
-            <button id="ten-button">+10</button>
-          </div>
         </div>
-          <button id="time-remaining-enter">Send</button>
+        <div class="button-cup">
+          <button id="five-button" style="width: 40%;">+5</button>
+          <button id="ten-button" style="width: 40%;">+10</button>
+        </div>
+          <button id="time-remaining-enter" style="width: 35%;">Send</button>
       </div>
 
       <!-- ready button -- a form with no field -->
-      <div class="ready">
+      <div class="ready" style="width: 30%;">
         <form>
         <!-- <form action="/chefsPage/ready" method="POST"> -->
 

@@ -1,6 +1,6 @@
 .chef-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   align-items: flex-start;
   padding: 1.5em;
   width: 100%;
@@ -8,18 +8,20 @@
   height: 100%;
   font-family: "Lato", sans-serif;
   justify-content: space-around;
+  background-image: url("https://media.istockphoto.com/photos/abstract-blurred-inside-interior-of-luxury-restaurant-background-with-picture-id1141273938?k=20&m=1141273938&s=612x612&w=0&h=bgf7Nov_XEG4p982-Dj9l0TxhItgAtZu5ASKJSxpTBI=");
+  background-size: 1450px 650px;
 }
 
 .chit {
   display: flex;
-
-  background-color: rgb(248, 211, 124);
+  background-color: white;
   border-radius: 5px;
-  width: 50%;
+  width: 70%;
   padding: 1em;
   margin: 1em;
   flex-direction: column;
   align-items: center;
+  margin: auto;
 }
 
 
@@ -28,27 +30,29 @@
 .order-view {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(248, 211, 124);
+  background-color: white;
   border-radius: 5px;
   width: 100%;
   padding: 0.5em;
+  height: 85px;
 
   .food-name {
-    background-color: rgb(211, 167, 133);
+    background-color: #FB7756;
     padding: 0.5em;
-    border-radius: 5px;
+    border-radius: 3px;
+    width: 20%;
   }
   .food-instructions {
-    background-color: rgb(189, 123, 73);
-    width: 100%;
+    background-color: #E74645;
+    width: 65%;
     padding: 0.5em;
-    border-radius: 5px;
+    border-radius: 3px;
   }
   .food-qty {
-    background-color: rgb(226, 214, 187);
+    background-color: #FDFA66;
+    width: 10%;
     padding: 0.5em;
-    border-radius: 5px;
-
+    border-radius: 3px;
   }
 
 }
@@ -59,14 +63,26 @@
 
 .status-entry {
   display: flex;
-  background-color: rgb(163, 155, 135);
-  width: 40%;
+  background-color: white;
+  width: 70%;
+  height: 200px;
+  padding: 1em;
+  margin: 1em;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 7px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+
+
+.order {
+  background-color: white;
+  width: 60%;
   height: 100%;
   padding: 1em;
   margin: 1em;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-end;
   border-radius: 7px;
 }
 
@@ -76,11 +92,77 @@
   background-color: green;
 }
 
-.ready {
-  background-color: orange;
-}
-
 
 .hidden {
   display: none;
+}
+
+
+
+button {
+  color: white;
+  background-color: #E74645;
+  border-color: #E74645;
+  border-radius: 8px;
+}
+
+
+
+.order-select-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  height: 175px;
+}
+
+.minute-entry {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2em;
+  height: 175px;
+
+  .entry-container {
+    width: 80%;
+    display: flex;
+    height: 25%;
+    margin: auto;
+    justify-content: space-around;
+  }
+
+  .button-cup {
+    display: flex;
+    height: 45%;
+    justify-content: space-around;
+    padding: 0.25em;
+  }
+
+  #time-remaining-enter {
+    height: 25%;
+    margin: auto;
+  }
+}
+
+.ready form {
+  width: 60%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1em;
+  margin: auto;
+
+  .ready-button {
+    height: 40%;
+  }
+
+  .paid-button {
+    height: 40%;
+  }
 }
