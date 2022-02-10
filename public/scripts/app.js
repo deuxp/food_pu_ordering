@@ -22,10 +22,65 @@ $(document).ready(function () {
     const item = { mID, name, description, price, instructions, quantity };
     cartItems.push(item); // [{}]
 
-    renderCart(cartItems, '#ordered-items');
+    //renderCart(cartItems, '#ordered-items');
 
-    renderCartTotals(cartItems, '#order-totals');
+    //renderCartTotals(cartItems, '#order-totals');
+
+    renderEntireCart(cartItems, '#ordered-items');
   })
+
+  const renderEntireCart = function (items, element) {
+    $(element).children().remove()
+    items.forEach((item, index) => {
+
+      let elem = ``;
+      if (index === 0) {
+        elem = `<tr>
+        <th> Name </th>
+        <th> Quantity </th>
+        <th> Price </th>
+        <th> Special Instuctions </th>
+        <th> Remove </th>
+      </tr>`
+      }
+      elem += `<tr>
+      <td>${item.name}</td>
+      <td>${item.quantity}</td>
+      <td>$${item.price / 100}</td>
+      <td>${item.instructions}</td>
+      <td> <button class="remove-button"> X </button> </td>
+      </tr>`;
+      $(element).append(elem)
+    })
+
+    let total = 0;
+    // iterate through items to find total price in dollars
+    items.forEach(item => {
+      total += item.quantity * item.price / 100;
+    })
+    //round total to 2 decimal places
+    total = total.toFixed(2);
+    // create HTML table element
+    const ele = `
+    <tr> <td> </td> </tr>
+    <tr> <td> </td> </tr>
+    <tr>
+    <td> <strong>Sub-total </strong></td>
+    <td>      </td>
+    <td>$ ${total} </td>
+    </tr>
+    <tr>
+    <td><strong>Tax </strong></td>
+    <td>      </td>
+    <td>$ ${(total * (0.15)).toFixed(2)} </td>
+    </tr><tr>
+    <td><strong>Total </strong> </td>
+    <td>      </td>
+    <td>$ ${(total * (1.15)).toFixed(2)} </td>
+    </tr>
+    `
+    $(element).append(ele)
+  }
 
   const renderCart = function (items, element) {
     $(element).children().remove()
@@ -44,7 +99,7 @@ $(document).ready(function () {
       elem += `<tr>
       <td>${item.name}</td>
       <td>${item.quantity}</td>
-      <td>$${item.price / 100}</td>
+      <td>$${(item.price /100)}</td>
       <td>${item.instructions}</td>
       <td> <button class="remove-button"> X </button> </td>
       </tr>`;
@@ -86,9 +141,11 @@ $(document).ready(function () {
     //mutate cartItems to remove index = rowIndex -1
     cartItems.splice(rowIndex - 1, 1)
     // need to re-do Cart View
-    renderCart(cartItems, '#ordered-items');
+    //renderCart(cartItems, '#ordered-items');
 
-    renderCartTotals(cartItems, '#order-totals');
+    //renderCartTotals(cartItems, '#order-totals');
+    renderEntireCart(cartItems, '#ordered-items');
+
   })
 
   /** TODO
