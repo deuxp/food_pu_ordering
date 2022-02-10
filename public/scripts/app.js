@@ -22,14 +22,10 @@ $(document).ready(function () {
     const item = { mID, name, description, price, instructions, quantity };
     cartItems.push(item); // [{}]
 
-    //renderCart(cartItems, '#ordered-items');
-
-    //renderCartTotals(cartItems, '#order-totals');
-
-    renderEntireCart(cartItems, '#ordered-items');
+    renderCart(cartItems, '#ordered-items');
   })
 
-  const renderEntireCart = function (items, element) {
+  const renderCart = function (items, element) {
     $(element).children().remove()
     items.forEach((item, index) => {
 
@@ -82,57 +78,6 @@ $(document).ready(function () {
     $(element).append(ele)
   }
 
-  const renderCart = function (items, element) {
-    $(element).children().remove()
-    items.forEach((item, index) => {
-
-      let elem = ``;
-      if (index === 0) {
-        elem = `<tr>
-        <th> Name </th>
-        <th> Quantity </th>
-        <th> Price </th>
-        <th> Special Instuctions </th>
-        <th> Remove </th>
-      </tr>`
-      }
-      elem += `<tr>
-      <td>${item.name}</td>
-      <td>${item.quantity}</td>
-      <td>$${(item.price /100)}</td>
-      <td>${item.instructions}</td>
-      <td> <button class="remove-button"> X </button> </td>
-      </tr>`;
-      $(element).append(elem)
-    })
-  }
-
-  const renderCartTotals = function (items, element) {
-    // clear table element
-    $(element).children().remove();
-    let total = 0;
-    // iterate through items to find total price in dollars
-    items.forEach(item => {
-      total += item.quantity * item.price / 100;
-    })
-    //round total to 2 decimal places
-    total = total.toFixed(2);
-    // create HTML table element
-    const elem = `<tr>
-    <td>Sub-total</td>
-    <td>$ ${total} </td>
-    </tr>
-    <tr>
-    <td>Tax</td>
-    <td>$ ${(total * (0.15)).toFixed(2)} </td>
-    </tr><tr>
-    <td>Total </td>
-    <td>$ ${(total * (1.15)).toFixed(2)} </td>
-    </tr>
-    `
-    $(element).append(elem)
-  }
-
   // the following listener removes items from the cart
   $("#ordered-items").on("click", ".remove-button", function () {
     // rowIndex value of table row object in Cart. 1 is the first remove (X) button and so on...
@@ -144,7 +89,7 @@ $(document).ready(function () {
     //renderCart(cartItems, '#ordered-items');
 
     //renderCartTotals(cartItems, '#order-totals');
-    renderEntireCart(cartItems, '#ordered-items');
+    renderCart(cartItems, '#ordered-items');
 
   })
 
