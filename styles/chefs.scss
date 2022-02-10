@@ -8,20 +8,20 @@
   height: 100%;
   font-family: "Lato", sans-serif;
   justify-content: space-around;
-  background-color: #b4b4b4;
+  background-image: url("https://media.istockphoto.com/photos/abstract-blurred-inside-interior-of-luxury-restaurant-background-with-picture-id1141273938?k=20&m=1141273938&s=612x612&w=0&h=bgf7Nov_XEG4p982-Dj9l0TxhItgAtZu5ASKJSxpTBI=");
+  background-size: 1450px 650px;
 }
 
 .chit {
   display: flex;
   background-color: white;
   border-radius: 5px;
-  width: 100%;
+  width: 70%;
   padding: 1em;
   margin: 1em;
   flex-direction: column;
   align-items: center;
   margin: auto;
-  border: solid;
 }
 
 
@@ -39,20 +39,20 @@
   .food-name {
     background-color: #FB7756;
     padding: 0.5em;
-    border-radius: 5px;
+    border-radius: 3px;
     width: 20%;
   }
   .food-instructions {
     background-color: #E74645;
     width: 65%;
     padding: 0.5em;
-    border-radius: 5px;
+    border-radius: 3px;
   }
   .food-qty {
     background-color: #FDFA66;
     width: 10%;
     padding: 0.5em;
-    border-radius: 5px;
+    border-radius: 3px;
   }
 
 }
@@ -64,17 +64,15 @@
 .status-entry {
   display: flex;
   background-color: white;
-  width: 100%;
+  width: 70%;
   height: 200px;
   padding: 1em;
   margin: 1em;
   flex-direction: row;
-  //justify-content: space-around;
   align-items: center;
   border-radius: 7px;
   margin: auto;
   margin-top: 10px;
-  border: solid;
 }
 
 
@@ -115,7 +113,10 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding: 2em;
+  padding-left: 3em;
+  padding-right: 3em;
+  padding-top: 2em;
+  padding-bottom: 2em;
   height: 175px;
 }
 
@@ -138,7 +139,7 @@ button {
   .button-cup {
     display: flex;
     height: 45%;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0.25em;
   }
 
