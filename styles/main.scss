@@ -1,4 +1,99 @@
-body {
+// $eat-now-color: rgb(80, 88, 97);
+// $eat-now-color: rgb(41, 129, 230);
+$eat-now-color: #1AC0C6;
+$yumr-color: #FACD60;
+$yumr-color-dark: rgb(249, 250, 214);
 
-  background-color: white;
+body {
+  background-image: url('/assets/imgs/angle-kitchen-large.jpeg');
+}
+
+.splash-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	height: 100%;
+  width: 100%;
+	padding-top: 20vh;
+  background-color: black;
+  opacity: 0.7;
+  animation: opacity 5s;
+
+}
+
+#yumr, #eat, #now {
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+	color: whitesmoke;
+	font-size: 7em;
+  font-weight: 100;
+	height: 100%;
+
+}
+
+#yumr {
+  font-weight: bolder;
+	position: absolute;
+	margin-right: 455px;
+	z-index: 3;
+  animation: a-pulse 3s infinite, a-yumr 3s;
+
+}
+
+#eat {
+  color: $eat-now-color;
+	position: absolute;
+  margin-left: 78px;
+	z-index: 2;
+	animation: a-eat 0.5s, a-color 6s infinite;
+}
+
+#now {
+  color: $eat-now-color;
+	position: absolute;
+	margin-left: 493px;
+	z-index: 1;
+	animation: a-now 1s, a-color 8s infinite;
+}
+
+/* animation name */
+@keyframes a-yumr {
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
+@keyframes a-eat {
+	0%{padding-left: 400px; opacity: 0;}
+  60%{opacity: 1;}
+
+	100%{padding-left: 0px;}
+}
+@keyframes a-now {
+	0%{padding-left: 390px; opacity: 0;}
+  70%{opacity: 1;}
+	100%{padding-left: 0px;}
+}
+
+
+@keyframes a-color {
+	0%{color: $eat-now-color;}
+	50%{color: rgba(192, 192, 192, 0.678);}
+	100%{color: $eat-now-color;}
+}
+
+@keyframes a-pulse {
+  0%{color: $yumr-color-dark;}
+  50%{color: $yumr-color;}
+  100%{color: $yumr-color-dark;}
+}
+
+@keyframes opacity {
+  0%{opacity: 0;}
+  100%{opacity: 0.7;}
+}
+
+@keyframes pulse-eat-now {
+  0%{color: whitesmoke}
+  50%{color: $eat-now-color}
+  100%{color: whitesmoke}
 }

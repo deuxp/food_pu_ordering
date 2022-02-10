@@ -67,7 +67,7 @@ $('document').ready(() => {
       // append a DOM element to: .status-entry
       $('.chit')
         .append(` <div class="time-stamp">${items[0].customer}</div>
-                  <div class="time-stamp">${items[0].time}</div>
+                  <div class="time-stamp">${items[0].time || ''}</div>
         `)
 
       billTicket(items, '.chit')
