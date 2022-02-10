@@ -1,4 +1,79 @@
 body {
+  background-image: url('/assets/imgs/angle-kitchen-large.jpeg');
+}
 
-  background-color: white;
+.splash-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	height: 100%;
+	padding-top: 20vh;
+}
+
+#yumr, #eat, #now {
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+	color: whitesmoke;
+	font-size: 7em;
+  font-weight: 100;
+	height: 100%;
+
+}
+
+#yumr {
+  font-weight: bolder;
+	position: absolute;
+	margin-right: 468px;
+
+	z-index: 3;
+
+  animation: a-pulse 5s infinite, a-yumr 6s;
+
+}
+
+#eat {
+  color: rgba(245, 245, 245, 0.678);
+	position: absolute;
+  margin-left: 58px;
+	z-index: 2;
+
+	animation-name: a-eat, a-color;
+	animation-duration: 3s;
+}
+
+#now {
+  color: rgba(245, 245, 245, 0.678);
+	position: absolute;
+	margin-left: 473px;
+	z-index: 1;
+
+	animation-name: a-now, a-color;
+	animation-duration: 4s;
+}
+
+/* animation name */
+@keyframes a-yumr {
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
+@keyframes a-eat {
+	0%{padding-left: 270px; opacity: 0;}
+	100%{padding-left: 0px; opacity: 1;}
+}
+@keyframes a-now {
+	0%{padding-left: 260px; opacity: 0;}
+	100%{padding-left: 0px; opacity: 1;}
+}
+
+
+@keyframes a-color {
+	0%{color: rgb(80, 88, 97);}
+	100%{color: rgba(245, 245, 245, 0.678);}
+}
+
+@keyframes a-pulse {
+  0%{color: whitesmoke}
+  50%{color: #FACD60}
+  100%{color: whitesmoke}
 }
