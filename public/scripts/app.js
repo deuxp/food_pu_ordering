@@ -27,19 +27,11 @@ $(document).ready(function () {
     const name = $(this).parent().parent().parent().find(".menu-item-name")[0].innerText;
     const description = $(this).parent().parent().parent().find(".menu-item-description")[0].innerText;
     const price = $(this).parent().parent().parent().find(".menu-item-price")[0].name;
-
-    const innerinstructions = $(this).parent().parent().find("#instructions");
-    const instructions = innerinstructions.val();
-
+    const instructions = $(this).parent().parent().find("#instructions").val();
     //  "Add to Cart" buttons have ID's assigned to them based on their order starting from 1. mID == "menu id"
     const mID = this.id;
     // create object to hold all item data
     const item = { mID, name, description, price, instructions, quantity };
-<<<<<<< HEAD
-=======
-    cartItems.push(item); // [{}]
-    innerinstructions.val('')
->>>>>>> master
 
 
     // update local
@@ -155,33 +147,21 @@ $(document).ready(function () {
 
   })
 
-  /** Helper Function:
-   * Purpose: pops out the "rder has been placed" bubble
-   * @param {''} elem element to slide up and down
-   * @param {*} delay slide back up
+  /** TODO
+   * - [X] send info to router
+   *  - [ ] place-order should clear the order list and totals
+   *
+   * then
+   * - [ ] pop up bubble: your order has been placed that dissappears
+   *
    */
-  const slideClear = (elem, delay) => {
-    elem.slideDown('fast', () => {
-      setTimeout(() => {
-        elem.slideUp('fast')
-      }, 3000)
-    })
-    setTimeout(() => {
-      window.location.reload()
-    },delay)
-  }
-
-
   $('#place-order-button').on('click', function (event) {
     event.preventDefault();
-
-    const $thank = $('.thank-you')
-
     $.post({
       data: { 'restaurant_id': 1, 'tip': 0, 'order' : cartItems },
       url: '/api/items/orders',
-
-      success: slideClear($thank, 4000)
+      success: refresh(1000)
+      // success: window.location.reload()
     })
     .catch(err => console.log(err.message))
   });
@@ -194,4 +174,3 @@ $(document).ready(function () {
   }
 
 });
-
