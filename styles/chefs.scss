@@ -23,7 +23,7 @@
 
 .chit {
   display: flex;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.507);
   border-radius: 5px;
   width: 70%;
   padding: 1em;
@@ -39,26 +39,28 @@
 .order-view {
   display: flex;
   justify-content: space-between;
-  background-color: white;
-  border-radius: 5px;
   width: 100%;
   padding: 0.5em;
   height: 85px;
+  font-weight: bold;
 
   .food-name {
-    background-color: #FB7756;
+    background-color: #a1a1a17c;
+    border: solid #FB7756;
     padding: 0.5em;
     border-radius: 3px;
     width: 20%;
   }
   .food-instructions {
-    background-color: #E74645;
+    background-color: #a1a1a17c;
+    border: solid #E74645;
     width: 65%;
     padding: 0.5em;
     border-radius: 3px;
   }
   .food-qty {
-    background-color: #FDFA66;
+    background-color: #a1a1a17c;
+    border: solid #FDFA66;
     width: 10%;
     padding: 0.5em;
     border-radius: 3px;
@@ -72,7 +74,7 @@
 
 .status-entry {
   display: flex;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.507);
   width: 70%;
   height: 200px;
   padding: 1em;
@@ -127,15 +129,31 @@ button {
   padding-top: 2em;
   padding-bottom: 2em;
   height: 175px;
+  align-items: center;
+
+  #order-select {
+    width: 50px;
+  }
+
+  .pending-button {
+    width: 185px;
+    box-shadow: inset 0 0 0 0 #da2f2f;
+    transition: ease-out 0.3s;
+  }
+
+  .pending-button:hover {
+    box-shadow: inset 185px 0 0 0 #da2f2f;
+  }
 }
 
 .minute-entry {
-  width: 100%;
+  width: 205px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   padding: 2em;
   height: 175px;
+  align-items: center;
 
   .entry-container {
     width: 80%;
@@ -148,13 +166,18 @@ button {
   .button-cup {
     display: flex;
     height: 45%;
-    justify-content: space-around;
+    width: 100%;
+    justify-content: space-evenly;
     padding: 0.25em;
   }
 
-  #time-remaining-enter {
-    height: 25%;
-    margin: auto;
+  #five-button, #ten-button, #time-remaining-enter {
+    box-shadow: inset 0 0 0 0 #da2f2f;
+    transition: ease-out 0.3s;
+  }
+
+  #five-button:hover, #ten-button:hover, #time-remaining-enter:hover {
+    box-shadow: inset 105px 0 0 0 #da2f2f;
   }
 }
 
@@ -166,12 +189,15 @@ button {
   justify-content: space-evenly;
   padding: 1em;
   margin: auto;
+  align-items: center;
 
-  .ready-button {
+  .ready-button, .paid-button {
     height: 40%;
+    box-shadow: inset 0 0 0 0 #da2f2f;
+    transition: ease-out 0.3s;
   }
 
-  .paid-button {
-    height: 40%;
+  .ready-button:hover, .paid-button:hover {
+    box-shadow: inset 130px 0 0 0 #da2f2f;
   }
 }
