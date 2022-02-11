@@ -1,6 +1,7 @@
 $yumr-yellow: #FACD60;
 $yumr-blue: #1AC0C6;
 $button-colors: #eb7e18;
+$font: 'Lato', sans-serif;
 
 nav {
   height: 100px;
@@ -13,14 +14,14 @@ nav {
 }
 
 #logo {
-  font-family: 'Lato', sans-serif;
+  font-family: $font;
   font-weight: 900;
   font-style: italic;
   font-size: 20px;
   padding-right: 1.5em;
   padding-top: 1em;
   padding-bottom: 1em;
-  // background-image: url("https://cdn-icons.flaticon.com/png/512/566/premium/566651.png?token=exp=1644015155~hmac=bb693d73286ca07c08034523aa68049d");
+  background-image: url("/assets/imgs/yumrs-logo.png");
   background-repeat: no-repeat;
   background-size: 60px 60px;
 }
