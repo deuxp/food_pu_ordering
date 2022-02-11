@@ -49,8 +49,8 @@ $(document).ready(function () {
       elem += `<tr>
       <td>${item.name}</td>
       <td>${item.quantity}</td>
-      <td>$${item.price / 100}</td>
-      <td>${item.instructions}</td>
+      <td>$${(Math.round(item.price)/100).toFixed(2)}</td>
+      <td style="max-width: 225px">${item.instructions}</td>
       <td> <button class="fa-solid fa-trash-can remove-button"> </button> </td>
       </tr>`;
       $(element).append(elem)
@@ -112,6 +112,7 @@ $(document).ready(function () {
       window.location.reload()
     },delay)
   }
+
 
 
   $('#place-order-button').on('click', function (event) {
