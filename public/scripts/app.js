@@ -97,22 +97,35 @@ $(document).ready(function () {
 
   })
 
-  /** TODO
-   * - [X] send info to router
-   *  - [ ] place-order should clear the order list and totals
-   *
-   * then
-   * - [ ] pop up bubble: your order has been placed that dissappears
-   *
+  /** Helper Function:
+   * Purpose: pops out the "rder has been placed" bubble
+   * @param {''} elem element to slide up and down
+   * @param {*} delay slide back up
    */
+  const slideClear = (elem, delay) => {
+    elem.slideDown('fast', () => {
+      setTimeout(() => {
+        elem.slideUp('fast')
+      }, 3000)
+    })
+    setTimeout(() => {
+      window.location.reload()
+    },delay)
+  }
+
+
   $('#place-order-button').on('click', function (event) {
     event.preventDefault();
+
+    const $thank = $('.thank-you')
+
     $.post({
       data: { 'restaurant_id': 1, 'tip': 0, 'order' : cartItems },
       url: '/api/items/orders',
-      success: location.reload()
+      success: slideClear($thank, 4000)
     })
     .catch(err => console.log(err.message))
   });
 
 });
+
