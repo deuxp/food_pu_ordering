@@ -35,8 +35,14 @@ body {
 }
 
 
-.menu-item-details-right-picture {
+.menu-item-details-right-picture img {
   margin: 0.5em;
+  width: 120px;
+  height: 120px;
+}
+
+.menu-item-details-right-picture img {
+  object-fit: cover;
 }
 
 #order-summary {
