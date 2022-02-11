@@ -2,9 +2,18 @@
 $(document).ready(function () {
 
   let cartItems = []; // [{}]
-  // future: JSON stringify the session cookie data re-assign cart items
-  // renderCart(cartItems, '#ordered-items'); for the future cookie
-  // renderCartTotals(cartItems, '#order-totals'); for the future cookie
+
+  //AS soon as the page loads the cartItems are updated with the saved cookie
+  // unpacks the JSON order from the session-cookie -- then updates the above var;
+  $.get({
+    url: '/api/items/cookie-data',
+  })
+  .then(data => {
+    // cartItems = data
+    cartItems = JSON.parse(data)
+  })
+
+
 
 
   $(".add-to-cart-button").on("click", function () {
@@ -20,16 +29,31 @@ $(document).ready(function () {
     const mID = this.id;
     // create object to hold all item data
     const item = { mID, name, description, price, instructions, quantity };
-    cartItems.push(item); // [{}]
 
-    renderCart(cartItems, '#ordered-items');
+
+
+    cartItems.push(item); // [{}]
+    $.post({
+      url: '/api/items/order-cart',
+      data: { cartItems },
+    })
+    .then(cart => {
+      const updatedCart = JSON.parse(cart)
+      console.log('\tsuccess: ', updatedCart)
+      renderCart(updatedCart, '#ordered-items')
+    })
   })
 
+
+// ================================================================================
+
+  // td = table data || tr = table row
   const renderCart = function (items, element) {
     $(element).children().remove()
     items.forEach((item, index) => {
 
       let elem = ``;
+      // 1. guard for empty elem
       if (index === 0) {
         elem = `<tr>
         <th> Name </th>
@@ -39,6 +63,8 @@ $(document).ready(function () {
         <th> Remove </th>
       </tr>`
       }
+
+      // 2. builds elem from one item obj
       elem += `<tr>
       <td>${item.name}</td>
       <td>${item.quantity}</td>
@@ -46,9 +72,12 @@ $(document).ready(function () {
       <td>${item.instructions}</td>
       <td> <button class="remove-button"> X </button> </td>
       </tr>`;
-      $(element).append(elem)
+
+      // 3. appends the elem to a table DOM
+      $(element).append(elem) //
     })
 
+    // calculates the total
     let total = 0;
     // iterate through items to find total price in dollars
     items.forEach(item => {
@@ -56,6 +85,7 @@ $(document).ready(function () {
     })
     //round total to 2 decimal places
     total = total.toFixed(2);
+
     // create HTML table element
     const ele = `
     <tr> <td> </td> </tr>
@@ -75,8 +105,19 @@ $(document).ready(function () {
     <td>$ ${(total * (1.15)).toFixed(2)} </td>
     </tr>
     `
+    // append table element to the end
     $(element).append(ele)
   }
+
+  // ================================================================================
+
+
+
+
+
+
+
+
 
   // the following listener removes items from the cart
   $("#ordered-items").on("click", ".remove-button", function () {
@@ -89,7 +130,16 @@ $(document).ready(function () {
     //renderCart(cartItems, '#ordered-items');
 
     //renderCartTotals(cartItems, '#order-totals');
-    renderCart(cartItems, '#ordered-items');
+    $.post({
+      url: '/api/items/remove-item',
+      data: { cartItems },
+    })
+    .then(cart => {
+      // const updatedCart = JSON.parse(cart)
+      console.log('\tsuccess removed item: ', cart)
+      renderCart(cart, '#ordered-items')
+    })
+    // renderCart(cartItems, '#ordered-items');
 
   })
 
@@ -110,5 +160,10 @@ $(document).ready(function () {
     })
     .catch(err => console.log(err.message))
   });
+
+  // throw the cart refresh in the event loop to display updated cookie on refresh
+  setTimeout(() => {
+    renderCart(cartItems, '#ordered-items');
+  }, 100);
 
 });
