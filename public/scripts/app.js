@@ -24,7 +24,10 @@ $(document).ready(function () {
     // create object to hold all item data
     const item = { mID, name, description, price, instructions, quantity };
     cartItems.push(item); // [{}]
+    // rest inputs of textarea and input for quantity
     innerinstructions.val('')
+    $('.quantity').val('1');
+
 
     renderCart(cartItems, '#ordered-items');
   })
@@ -48,7 +51,7 @@ $(document).ready(function () {
       <td>${item.quantity}</td>
       <td>$${item.price / 100}</td>
       <td>${item.instructions}</td>
-      <td> <button class="remove-button"> X </button> </td>
+      <td> <button class="fa-solid fa-trash-can remove-button"> </button> </td>
       </tr>`;
       $(element).append(elem)
     })
@@ -64,16 +67,16 @@ $(document).ready(function () {
     const ele = `
     <tr> <td> </td> </tr>
     <tr> <td> </td> </tr>
-    <tr>
+    <tr id="subtotal">
     <td> <strong>Sub-total </strong></td>
     <td>      </td>
     <td>$ ${total} </td>
     </tr>
-    <tr>
+    <tr id="tax">
     <td><strong>Tax </strong></td>
     <td>      </td>
     <td>$ ${(total * (0.15)).toFixed(2)} </td>
-    </tr><tr>
+    </tr><tr id="total">
     <td><strong>Total </strong> </td>
     <td>      </td>
     <td>$ ${(total * (1.15)).toFixed(2)} </td>
@@ -89,10 +92,7 @@ $(document).ready(function () {
     console.log(rowIndex);
     //mutate cartItems to remove index = rowIndex -1
     cartItems.splice(rowIndex - 1, 1)
-    // need to re-do Cart View
-    //renderCart(cartItems, '#ordered-items');
 
-    //renderCartTotals(cartItems, '#order-totals');
     renderCart(cartItems, '#ordered-items');
 
   })
