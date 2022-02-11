@@ -31,11 +31,11 @@ $(document).ready(function () {
     //  "Add to Cart" buttons have ID's assigned to them based on their order starting from 1. mID == "menu id"
     const mID = this.id;
     // create object to hold all item data
-    const item = { mID, name, description, price, instructions, quantity };
 
     const innerinstructions = $(this).parent().parent().find("#instructions");
     const instructions = innerinstructions.val();
 
+    const item = { mID, name, description, price, instructions, quantity };
     // update local
     cartItems.push(item); // [{}]
     innerinstructions.val('')
@@ -47,7 +47,7 @@ $(document).ready(function () {
     .then(cart => {
       const updatedCart = JSON.parse(cart)
       console.log('\tsuccess: ', updatedCart)
-      renderCart(cartItems, '#ordered-items') // could even still use the local // cookies are there for refresh
+      renderCart(cartItems, '#ordered-items')
     })
   })
 
@@ -115,14 +115,6 @@ $(document).ready(function () {
     // append table element to the end
     $(element).append(ele)
   }
-
-  // ================================================================================
-
-
-
-
-
-
 
 
 
