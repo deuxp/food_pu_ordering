@@ -93,6 +93,17 @@ $(document).ready(function () {
 
   })
 
+  const slideClear = (elem, delay) => {
+    elem.slideDown('fast', () => {
+      setTimeout(() => {
+        elem.slideUp('slow')
+      }, 3000)
+    })
+    setTimeout(() => {
+      window.location.reload()
+    },delay)
+  }
+
   /** TODO
    * - [X] send info to router
    *  - [ ] place-order should clear the order list and totals
@@ -103,12 +114,17 @@ $(document).ready(function () {
    */
   $('#place-order-button').on('click', function (event) {
     event.preventDefault();
+
+    const $thank = $('.thank-you')
+
     $.post({
       data: { 'restaurant_id': 1, 'tip': 0, 'order' : cartItems },
       url: '/api/items/orders',
-      success: location.reload()
+      success: slideClear($thank, 4000)
+      // success: location.reload()
     })
     .catch(err => console.log(err.message))
   });
 
 });
+
