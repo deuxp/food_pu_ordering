@@ -34,6 +34,7 @@ $(document).ready(function () {
 
     const innerinstructions = $(this).parent().parent().find("#instructions");
     const instructions = innerinstructions.val();
+    $('.quantity').val('1');
 
     const item = { mID, name, description, price, instructions, quantity };
     // update local
