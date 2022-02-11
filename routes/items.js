@@ -158,14 +158,46 @@ module.exports = (db) => {
  // +++_+_+_+_+_-=_+_+-+_+_==_++++_+_+_+_+_-=_+_+-+_+_==_++++_+_+_+_+_-=_+_+-+_+_==_++++_+_+_+_+_-=_+_+-+_+_==_+
 
   // if this works, the terminaotr part will be JSON string and parse, then modify then stringify
-  router.post("/cookie-data", (req, res) => {
+  router.get("/cookie-data", (req, res) => {
     // req.session.order = 'JSON goes here'
     // console.log('\t', req.session.user_id)
     // console.log('\t', req.session)
+
+    // return the data
+    // console.log('\tit passed through')
+    // console.log(req.session.order || [])
+    if (!req.session.order) {
+      req.session.order = '[]'
+    }
+    console.log('\t the session is', req.session.order)
+    return res.send(req.session.order); // as a JSON string
   })
 
+  router.post('/order-cart', (req, res) => {
+    // recieve cart items
+    const { cartItems } = req.body;
+    // make a JSON string
+    const stringy = JSON.stringify(cartItems)
+    // update the session.order
+    req.session.order = stringy;
 
+    return res.send(stringy);
+  })
 
+  // pass through -- pass off
+  // this removes an item from the cart and then returns the updated data
+  // do all of the JSONing here.
+  router.post('/remove-item', (req, res) => {
+        // recieve cart items
+        const { cartItems } = req.body;
+        // make a JSON string
+        const stringy = JSON.stringify(cartItems);
+        // update the session.order
+        req.session.order = stringy;
+        console.log('\tstringy remove: ', stringy)
+        // return the obj not the string
+        return res.send(cartItems);
+  })
 
   return router;
 };
