@@ -46,7 +46,7 @@ body {
 }
 
 .menu-item-bottom {
-  background-color: antiquewhite;
+  background-color: lighten($yumr-yellow, 20%);
 }
 
 #instructions {
@@ -56,6 +56,18 @@ body {
 
 .menu-item-bottom-add-to-cart {
   padding-left: 0.5em;
+}
+
+#subtotal {
+  background-color: lighten($yumr-blue, 50%);
+}
+
+#tax {
+  background-color: lighten($yumr-yellow, 20%);
+}
+
+#total {
+  background-color: lighten($yumr-blue, 50%);
 }
 
 #instructions {
