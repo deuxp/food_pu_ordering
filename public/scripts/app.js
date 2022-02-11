@@ -34,10 +34,12 @@ $(document).ready(function () {
 
     const innerinstructions = $(this).parent().parent().find("#instructions");
     const instructions = innerinstructions.val();
+    $('.quantity').val('1');
 
     const item = { mID, name, description, price, instructions, quantity };
     // update local
     cartItems.push(item); // [{}]
+    // rest inputs of textarea and input for quantity
     innerinstructions.val('')
     // update the session
     $.post({
@@ -75,9 +77,9 @@ $(document).ready(function () {
       elem += `<tr>
       <td>${item.name}</td>
       <td>${item.quantity}</td>
-      <td>$${item.price / 100}</td>
-      <td>${item.instructions}</td>
-      <td> <button class="remove-button"> X </button> </td>
+      <td>$${(Math.round(item.price)/100).toFixed(2)}</td>
+      <td style="max-width: 225px">${item.instructions}</td>
+      <td> <button class="fa-solid fa-trash-can remove-button"> </button> </td>
       </tr>`;
 
       // 3. appends the elem to a table DOM
@@ -97,16 +99,16 @@ $(document).ready(function () {
     const ele = `
     <tr> <td> </td> </tr>
     <tr> <td> </td> </tr>
-    <tr>
+    <tr id="subtotal">
     <td> <strong>Sub-total </strong></td>
     <td>      </td>
     <td>$ ${total} </td>
     </tr>
-    <tr>
+    <tr id="tax">
     <td><strong>Tax </strong></td>
     <td>      </td>
     <td>$ ${(total * (0.15)).toFixed(2)} </td>
-    </tr><tr>
+    </tr><tr id="total">
     <td><strong>Total </strong> </td>
     <td>      </td>
     <td>$ ${(total * (1.15)).toFixed(2)} </td>
