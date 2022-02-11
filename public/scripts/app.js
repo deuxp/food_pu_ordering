@@ -15,12 +15,16 @@ $(document).ready(function () {
     const name = $(this).parent().parent().parent().find(".menu-item-name")[0].innerText;
     const description = $(this).parent().parent().parent().find(".menu-item-description")[0].innerText;
     const price = $(this).parent().parent().parent().find(".menu-item-price")[0].name;
-    const instructions = $(this).parent().parent().find("#instructions").val();
+
+    const innerinstructions = $(this).parent().parent().find("#instructions");
+    const instructions = innerinstructions.val();
+
     //  "Add to Cart" buttons have ID's assigned to them based on their order starting from 1. mID == "menu id"
     const mID = this.id;
     // create object to hold all item data
     const item = { mID, name, description, price, instructions, quantity };
     cartItems.push(item); // [{}]
+    innerinstructions.val('')
 
     renderCart(cartItems, '#ordered-items');
   })
