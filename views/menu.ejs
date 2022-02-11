@@ -53,7 +53,7 @@
                   </div>
                 </div>
                 <div class="menu-item-bottom">
-                  <textarea name="instructions" id="instructions"
+                  <textarea name="instructions" id="instructions" rows="2" cols="50" maxlength="100"
                     placeholder="Special instructions for the restaurant?"></textarea>
                   <div class="menu-item-bottom-add-to-cart">
                     <label for="quantity">Quantity:</label>
@@ -65,8 +65,9 @@
               <% }; %>
       </div>
       <div id="order-summary">
+        <div id="cart">
         <h2> My Cart</h2>
-        <table class="table table-borderless" id="ordered-items">
+        <table class="table table-responsive table-borderless" id="ordered-items">
           <tr>
             <th> Name </th>
             <th> Quantity </th>
@@ -76,6 +77,7 @@
         <button id="place-order-button" style="max-width: 8em;"> Place Order</button>
         <div class="thank-you hidden">Your order has been placed :)</div>
       </div>
+    </div>
 
 
 
