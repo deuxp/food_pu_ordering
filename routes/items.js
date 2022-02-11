@@ -2,6 +2,7 @@
 const { query } = require('express');
 const express = require('express');
 const { ConnectionPolicyPage } = require('twilio/lib/rest/voice/v1/connectionPolicy');
+const { validateExpressRequest } = require('twilio/lib/webhooks/webhooks');
 const router  = express.Router();
 
 require('dotenv').config()
@@ -62,26 +63,6 @@ module.exports = (db) => {
   });
 
 
-  /** TODO:
-   * - [X] whats the data look like?
-   *
-   * - [X] unpack seesion id
-   *  - [X init order in db using INSERT .. using the sesssion where name is "" ID
-   *  - [X] return order ID
-   *
-   * .then()
-   * - [X] unpack the req.body --> it is { order }
-   *  - [X] write the insert query for one item to the order_items table -> make sure that you include the order number
-   *    - [X] loop through with this query to insert
-   *      - [X] then sendSMS() <-- refer to the router endpoint defined below
-   *        - [X] error handle
-   * new router send-order-SMS
-   * - [X] import the sms func to the page.. if it is not there. maybe refactor so we are using the same one.. import the necessary numbers from the dotenv
-   *  - [X] text the restaurant: order id, name of the
-   *    - [X] text the customer order-confirmed
-   *        - [X] error handle
-   */
-
 
 
   // Create the Order
@@ -92,6 +73,7 @@ module.exports = (db) => {
     const { tip } =  req.body;
     const { order } =  req.body; // [{}] // --> req.body.order[n].mID === item_id
     let phone;
+    // req.session.order = '[]'
     // init order query
     const queryInitOrder = `
     INSERT INTO orders (restaurant_id, customer_id, time, tip)
@@ -120,7 +102,6 @@ module.exports = (db) => {
         // return the new order id
         return db.query(queryInitOrder, [restaurant_id, customer, tip])
       })
-      // works up to HERE
       .then(orderID => {
         const { id } = orderID.rows[0] // id of current order created
         // loop through with the insert query
@@ -138,13 +119,15 @@ module.exports = (db) => {
           orderMSG += `\n- ${item.quantity} x ${item.name} ... ${item.instructions || ''}`
         })
 
-        console.log('\t', orderMSG)
+        // console.log('\t', orderMSG)
         const confirmationMSG = `Hello ${user_id}, your order has been placed`
 
         // SMS the order to the restaurant // test one at a time sinc it is the same phone#
         sendSMS(orderMSG, restaurant)
+        console.log('\t should be null: ', req.session.order)
         // sendSMS(confirmationMSG, phone)
-
+        // res.redirect('/api/items/empty-cart')
+        return res.redirect('/api/items/empty-cart')
       })
       .catch(err => {
         console.log(err.message)
@@ -173,6 +156,8 @@ module.exports = (db) => {
     return res.send(req.session.order); // as a JSON string
   })
 
+
+
   router.post('/order-cart', (req, res) => {
     // recieve cart items
     const { cartItems } = req.body;
@@ -197,6 +182,12 @@ module.exports = (db) => {
         console.log('\tstringy remove: ', stringy)
         // return the obj not the string
         return res.send(cartItems);
+  })
+
+  router.get('/empty-cart', (req, res) => {
+    console.log('\n\tthe cart has been emptied\n')
+    req.session.order = null;
+    return res.redirect('/api/items')
   })
 
   return router;
