@@ -1,6 +1,7 @@
 $yumr-yellow: #FACD60;
 $yumr-blue: #1AC0C6;
 $button-colors: #eb7e18;
+$font: 'Lato', sans-serif;
 
 nav {
   height: 100px;
@@ -13,7 +14,7 @@ nav {
 }
 
 #logo {
-  font-family: 'Lato', sans-serif;
+  font-family: $font;
   font-weight: 900;
   font-style: italic;
   font-size: 20px;
