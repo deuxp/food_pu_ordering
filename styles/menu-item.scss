@@ -1,3 +1,8 @@
+$yumr-yellow: #FACD60;
+$yumr-blue: #1AC0C6;
+$button-colors: #eb7e18;
+$font: 'Lato', sans-serif;
+
 
 main.menu-container {
   display:flex;
@@ -55,4 +60,28 @@ body {
 
 #instructions {
   width: 98%;
+}
+
+.thank-you {
+  font-size: 1.5em;
+  margin-top: 1em;
+  padding: 0.5em;
+  border: dotted;
+  border-radius: 9px;
+  font-family: $font;
+  box-shadow: 12px 12px 2px 1px rgb(128, 117, 117);
+  animation: swirl 3s infinite;
+  color: rgb(48, 31, 1);
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes swirl {
+  0%{background-color: $yumr-yellow;}
+  25%{background-color: $yumr-blue;}
+  50%{background-color: $yumr-yellow;}
+  75%{background-color: $yumr-blue;}
+  100%{background-color: $yumr-yellow;}
 }
