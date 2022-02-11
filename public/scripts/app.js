@@ -13,7 +13,10 @@ $(document).ready(function () {
     cartItems = JSON.parse(data)
   })
 
-
+  // throw the cart refresh in the event loop to display updated cookie on refresh
+  setTimeout(() => {
+    renderCart(cartItems, '#ordered-items');
+  }, 100);
 
 
   $(".add-to-cart-button").on("click", function () {
@@ -31,8 +34,9 @@ $(document).ready(function () {
     const item = { mID, name, description, price, instructions, quantity };
 
 
-
+    // update local
     cartItems.push(item); // [{}]
+    // update the session
     $.post({
       url: '/api/items/order-cart',
       data: { cartItems },
@@ -40,7 +44,7 @@ $(document).ready(function () {
     .then(cart => {
       const updatedCart = JSON.parse(cart)
       console.log('\tsuccess: ', updatedCart)
-      renderCart(updatedCart, '#ordered-items')
+      renderCart(cartItems, '#ordered-items') // could even still use the local // cookies are there for refresh
     })
   })
 
@@ -124,12 +128,12 @@ $(document).ready(function () {
     // rowIndex value of table row object in Cart. 1 is the first remove (X) button and so on...
     const rowIndex = $(this).parent().parent()[0].rowIndex
     console.log(rowIndex);
-    //mutate cartItems to remove index = rowIndex -1
-    cartItems.splice(rowIndex - 1, 1)
-    // need to re-do Cart View
-    //renderCart(cartItems, '#ordered-items');
 
-    //renderCartTotals(cartItems, '#order-totals');
+    // removes locally
+    // cartItems remove index = rowIndex -1
+    cartItems.splice(rowIndex - 1, 1)
+
+    // updates the session
     $.post({
       url: '/api/items/remove-item',
       data: { cartItems },
@@ -137,9 +141,9 @@ $(document).ready(function () {
     .then(cart => {
       // const updatedCart = JSON.parse(cart)
       console.log('\tsuccess removed item: ', cart)
-      renderCart(cart, '#ordered-items')
+      renderCart(cartItems, '#ordered-items')
     })
-    // renderCart(cartItems, '#ordered-items');
+
 
   })
 
@@ -156,14 +160,17 @@ $(document).ready(function () {
     $.post({
       data: { 'restaurant_id': 1, 'tip': 0, 'order' : cartItems },
       url: '/api/items/orders',
-      success: window.location.reload()
+      success: refresh(1000)
+      // success: window.location.reload()
     })
     .catch(err => console.log(err.message))
   });
 
-  // throw the cart refresh in the event loop to display updated cookie on refresh
-  setTimeout(() => {
-    renderCart(cartItems, '#ordered-items');
-  }, 100);
+  // helper function
+  const refresh = delay => {
+    setTimeout(() => {
+      window.location.reload()
+    }, delay);
+  }
 
 });
