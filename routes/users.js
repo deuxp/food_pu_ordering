@@ -14,8 +14,9 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        // const users = data.rows;
+        // res.json({ users });
+        res.redirect('/')
       })
       .catch(err => {
         res
