@@ -1,9 +1,12 @@
-Food Ordering App
-=========
+# YUMRs
 
-## YUMRs
+---
 
-YUMRs is a web application that allows a user to login and order food, and receive text notifications on the status of their order.
+## Food Ordering App
+
+YUMRs is a web application that allows a user to login and order food, and receive SMS text notifications on the status of their order. There is also a UI for the restaurant side, to update their customer on the status of their order via SMS.
+
+This project is for educational purposes only. Enjoy!
 
 ## Final Product
 !["screenshot of landing page"](https://raw.githubusercontent.com/deuxp/food_pu_ordering/ec0f34e723494c4f58121dc76f361a6eb9214241/public/assets/imgs/landing-screenshot.png)
@@ -22,9 +25,14 @@ YUMRs is a web application that allows a user to login and order food, and recei
 - twilio
 
 ## Getting Started 
-- create a [twilio](https://www.twilio.com/try-twilio) free trial account 
-- in your .env file add: TWILIO_ACCOUNT_SID=[your_sid], TWILIO_AUTH_TOKEN=[your_token], PHONE_TWILIO=[your_twilio_number], PHONE_RECIEVE=[your_twilio_number], and PHONE_RESTAURANT=+1[your_phone_number]
-- in 01_users.sql (in the seeds folder) edit the file to have your own phone number and save the file
-- in your terminal run `npm run db:reset`
-- when logging in enter `Alice` or `Raymond`
-- now you will recieve text alerts to your phone number from twilio
+1. create a [twilio](https://www.twilio.com/try-twilio) free trial account 
+1. in your .env file add the following: 
+  1. TWILIO_ACCOUNT_SID=[your_sid],
+  1. TWILIO_AUTH_TOKEN=[your_token],
+  1. PHONE_TWILIO=[your_twilio_number],
+  1. PHONE_RECIEVE=[your_twilio_number],
+  1. PHONE_RESTAURANT=+1[your_phone_number]
+1. in 01_users.sql (in the seeds folder) edit the file to have your own phone number and save the file
+1. in your terminal run `npm run db:reset`
+1. when logging in enter `Alice` or `Raymond`
+1. now you will recieve text alerts to your phone number from twilio
