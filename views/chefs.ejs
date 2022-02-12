@@ -16,7 +16,7 @@
   <link rel="shortcut icon" type="image/jpg" href="/assets/imgs/favicon.png">
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
   <script type="text/javascript" src="/scripts/chefApp.js"></script>
 
   <!-- fonts -->
@@ -26,14 +26,11 @@
 
 </head>
 
-<body>
+<body class="chef-body">
   <%- include('partials/_nav') %>
 
   <!-- <img class="chef-bg" src="/assets/imgs/chefbg-wahsed.jpg" alt="kitchen"> -->
   <main class="chef-container">
-
-    <article class="chit hidden"></article>
-
 
     <div class="status-entry">
       <!-- PENDING: route to /pending of chefsPage.js will take care of twilio -->
@@ -75,6 +72,8 @@
         </form>
       </div>
     </div>
+
+    <article class="chit hidden"></article>
   </main>
 
 </body>
