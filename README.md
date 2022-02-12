@@ -6,9 +6,9 @@ Food Ordering App
 YUMRs is a web application that allows a user to login and order food, and receive text notifications on the status of their order.
 
 ## Final Product
-!["screenshot of landing page"]()
-!["screenshot of menu page"]()
-!["screenshot of chef's page"]()
+!["screenshot of landing page"](https://raw.githubusercontent.com/deuxp/food_pu_ordering/ec0f34e723494c4f58121dc76f361a6eb9214241/public/assets/imgs/landing-screenshot.png)
+!["screenshot of menu page"](https://raw.githubusercontent.com/deuxp/food_pu_ordering/ec0f34e723494c4f58121dc76f361a6eb9214241/public/assets/imgs/menu-screenshot.png)
+!["screenshot of chef's page"](https://raw.githubusercontent.com/deuxp/food_pu_ordering/ec0f34e723494c4f58121dc76f361a6eb9214241/public/assets/imgs/chefs-screenshot.png)
 
 ## Dependencies
 - chalk
