@@ -2,7 +2,7 @@
 
 ---
 
-## Food Ordering App
+## The Food Ordering App
 
 YUMRs is a web application that allows a user to login and order food, and receive SMS text notifications on the status of their order. There is also a UI for the restaurant side, to update their customer on the status of their order via SMS.
 
