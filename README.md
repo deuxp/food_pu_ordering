@@ -26,13 +26,13 @@ This project is for educational purposes only. Enjoy!
 
 ## Getting Started 
 1. create a [twilio](https://www.twilio.com/try-twilio) free trial account 
-1. in your .env file add the following: 
-  1. TWILIO_ACCOUNT_SID=[your_sid],
-  1. TWILIO_AUTH_TOKEN=[your_token],
-  1. PHONE_TWILIO=[your_twilio_number],
-  1. PHONE_RECIEVE=[your_twilio_number],
-  1. PHONE_RESTAURANT=+1[your_phone_number]
-1. in 01_users.sql (in the seeds folder) edit the file to have your own phone number and save the file
-1. in your terminal run `npm run db:reset`
-1. when logging in enter `Alice` or `Raymond`
-1. now you will recieve text alerts to your phone number from twilio
+2. in your .env file add the following: 
+  - TWILIO_ACCOUNT_SID=[your_sid],
+  - TWILIO_AUTH_TOKEN=[your_token],
+  - PHONE_TWILIO=[your_twilio_number],
+  - PHONE_RECIEVE=[your_twilio_number],
+  - PHONE_RESTAURANT=+1[your_phone_number]
+3. in 01_users.sql (in the seeds folder) edit the file to have your own phone number and save the file
+4. in your terminal run `npm run db:reset`
+4. when logging in enter `Alice` or `Raymond`
+5. now you will recieve text alerts to your phone number from twilio
