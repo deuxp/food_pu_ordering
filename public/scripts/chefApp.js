@@ -156,7 +156,8 @@ $('document').ready(() => {
       $.ajax('/api/chefs/paid', {
         method: 'POST',
         data: {'order': $order},
-        success: location.reload()
+        success: refresh(500)
+        // success: location.reload()
        })
         .catch(err => {
           res
@@ -165,6 +166,12 @@ $('document').ready(() => {
         })
     })
 
+    // helper function to refresh the order select menu
+    const refresh = delay => {
+      setTimeout(() => {
+        window.location.reload()
+      }, delay)
+    }
 
 });
 
