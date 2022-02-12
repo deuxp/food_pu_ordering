@@ -37,7 +37,7 @@ $yumr-color-dark: rgb(249, 250, 214);
 	position: absolute;
 	margin-right: 455px;
 	z-index: 3;
-  animation: a-pulse 3s infinite, a-yumr 3s;
+  animation: a-pulse 3s infinite, a-yumr 0.4s;
 
 }
 
@@ -46,7 +46,7 @@ $yumr-color-dark: rgb(249, 250, 214);
 	position: absolute;
   margin-left: 78px;
 	z-index: 2;
-	animation: a-eat 0.5s, a-color 6s infinite;
+	animation: a-eat 0.7s cubic-bezier(0.25, 0.1, 0.05, 1.01), a-color 6s infinite;
 }
 
 #now {
@@ -54,7 +54,7 @@ $yumr-color-dark: rgb(249, 250, 214);
 	position: absolute;
 	margin-left: 493px;
 	z-index: 1;
-	animation: a-now 1s, a-color 8s infinite;
+	animation: a-now 0.8s cubic-bezier(0.25, 0.1, 0.21, 0.85), a-color 8s infinite;
 }
 
 /* animation name */
@@ -63,14 +63,14 @@ $yumr-color-dark: rgb(249, 250, 214);
 	100%{opacity: 1;}
 }
 @keyframes a-eat {
-	0%{padding-left: 400px; opacity: 0;}
-  60%{opacity: 1;}
+	0%{padding-left: 400px; opacity: 0.2;}
+  40%{opacity: 1;}
 
 	100%{padding-left: 0px;}
 }
 @keyframes a-now {
-	0%{padding-left: 390px; opacity: 0;}
-  70%{opacity: 1;}
+	0%{padding-left: 400px; opacity: 0.2;}
+  30%{opacity: 1;}
 	100%{padding-left: 0px;}
 }
 
@@ -88,7 +88,7 @@ $yumr-color-dark: rgb(249, 250, 214);
 }
 
 @keyframes opacity {
-  0%{opacity: 0;}
+  0%{opacity: 0.1;}
   100%{opacity: 0.7;}
 }
 
