@@ -9,11 +9,12 @@ YUMRs is a web application that allows a user to login and order food, and recei
 This project is for educational purposes only. Enjoy!
 
 ![animated gif depicting general app usage](public/assets/gifs/yumr.gif)
-![animated gif demonstrating SMS feature](public/assets/gifs/yumrSMS.gif)
 
 <!-- !["screenshot of landing page"](https://raw.githubusercontent.com/deuxp/food_pu_ordering/ec0f34e723494c4f58121dc76f361a6eb9214241/public/assets/imgs/landing-screenshot.png)
 !["screenshot of menu page"](https://raw.githubusercontent.com/deuxp/food_pu_ordering/ec0f34e723494c4f58121dc76f361a6eb9214241/public/assets/imgs/menu-screenshot.png)
 !["screenshot of chef's page"](https://raw.githubusercontent.com/deuxp/food_pu_ordering/ec0f34e723494c4f58121dc76f361a6eb9214241/public/assets/imgs/chefs-screenshot.png) -->
+
+![animated gif demonstrating SMS feature](public/assets/imgs/yumrSMS-77.jpg)
 
 ## Dependencies
 
