@@ -16,18 +16,6 @@ This project is for educational purposes only. Enjoy!
 
 ![animated gif demonstrating SMS feature](public/assets/imgs/yumrSMS-77.jpg)
 
-## Dependencies
-
-- chalk
-- cookie-session
-- dotenv
-- ejs
-- express
-- morgan
-- pg
-- sass
-- twilio
-
 ## Getting Started
 
 1. create a [twilio](https://www.twilio.com/try-twilio) free trial account
@@ -55,3 +43,15 @@ DB_NAME="your database name"
 4. in your terminal run `npm run db:reset`
 5. when logging in enter `Alice` or `Raymond`
 6. now you will recieve text alerts to your phone number from twilio
+
+## Dependencies
+
+- chalk
+- cookie-session
+- dotenv
+- ejs
+- express
+- morgan
+- pg
+- sass
+- twilio
